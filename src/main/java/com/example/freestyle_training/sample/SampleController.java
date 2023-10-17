@@ -42,4 +42,8 @@ public class SampleController {
         SpringApplication.exit(context, () -> 0);
     }
 
+    @RequestMapping(path = "taniyam")
+    public void taniyama(Model model) {
+
+    }
 }
