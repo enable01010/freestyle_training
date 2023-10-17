@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FreestyleTrainingApplication<freestyle_training>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.freestyle_training.FreestyleTrainingApplication",
+            "projectName": "freestyle_training",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
