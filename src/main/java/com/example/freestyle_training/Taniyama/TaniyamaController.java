@@ -59,4 +59,11 @@ public class TaniyamaController {
 
     }
 
+    @RequestMapping(path = "/memoPage")
+    public String memoPageRequest(@ModelAttribute Account account, Model model) throws IOException {
+
+        model.addAttribute("Account", account);
+
+        return "Taniyama/DebugStart";
+    }
 }

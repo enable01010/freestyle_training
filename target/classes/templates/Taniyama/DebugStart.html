@@ -12,6 +12,11 @@
         <h2>谷山</h2>
             <a href = "http://localhost:8080/sample">サンプル</a><br>
             <a href = "http://localhost:8080/loginPage">ログイン</a><br>
+            <form action="#" th:action="@{/memoPage}" th:object="${Account}" method="post" name="memoPageForm">
+                <input type="hidden" th:field="*{name}" value="*{name}">
+                <input type="hidden" th:field="*{passward}" value="*{passward}">
+                <input type="submit" value="メモ" />
+            </form><br>
         <h2>平田</h2>
 
         <h2>黒地</h2>

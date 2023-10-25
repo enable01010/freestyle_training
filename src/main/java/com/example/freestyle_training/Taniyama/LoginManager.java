@@ -37,6 +37,7 @@ public class LoginManager {
                     String passward = spritContent[1];
 
                     if (name.equals(account.getName())) {
+                        br.close();
                         if (passward.equals(account.getPassward())) {
                             return AccountCheckResult.success;
                         } else {
@@ -46,7 +47,7 @@ public class LoginManager {
                     }
 
                 }
-
+                br.close();
                 return AccountCheckResult.accountNon;
             }
 
