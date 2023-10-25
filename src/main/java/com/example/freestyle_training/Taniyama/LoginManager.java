@@ -25,7 +25,7 @@ public class LoginManager {
             return AccountCheckResult.inputNon;
 
         try {
-            File file = new File("src\\main\\java\\com\\example\\freestyle_training\\Taniyama\\AccoutData.txt");
+            File file = new File("src\\main\\db\\AccoutData.txt");
 
             if (file.exists()) {
                 FileReader fr = new FileReader(file);
