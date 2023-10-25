@@ -10,13 +10,19 @@
     <body>
 
         <h2>谷山</h2>
-            <a href = "http://localhost:8080/sample">サンプル</a>
+            <a href = "http://localhost:8080/sample">サンプル</a><br>
+            <a href = "http://localhost:8080/loginPage">ログイン</a><br>
         <h2>平田</h2>
 
         <h2>黒地</h2>
 
         <h2>山川</h2>
 
+        <div th:object="${Account}">
+            <h2>アカウント情報</h2>
+            ユーザー名:<div th:text="*{name}"></div>
+            パスワード:<div th:text="*{passward}"></div>
+        </div>
         <a href = "end"> サーバーを終了する</a>
     </body>
 </html>
