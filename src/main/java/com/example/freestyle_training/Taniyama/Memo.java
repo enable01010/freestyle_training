@@ -18,7 +18,7 @@ public class Memo {
     }
 
     public void setText(String text) {
-        this.date = text;
+        this.text = text;
     }
     // #endregion
 }
