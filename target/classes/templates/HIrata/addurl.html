@@ -4,26 +4,16 @@
     <script th:inline="javascript"></script>
     <head>
         <meta charset = "UTF-8">
-        <title></title>
+        <title>URLの追加</title>
     </head>
 
     <body>
-    <tr th:each="urlINfomation:${urlINfomation}">
+    <h2>基本情報</h2>
+    <form action="#" th:action="@{/addurl}" th:object="${UrlInfomation}" method="post">
+        <p>name:<input type="text" th:field="*{name}" /> URL:<input type="text" th:field="*{url}" /></p>
         <h2>基本情報</h2>
-        <form action="haruContloller.java" method="post">
-            <td th:text="${urlINfomation.name}"></td>
-            <input type="hidden" name="name" th:value="${urlINfomation.name}">
-            <td th:text="${urlINfomation.url}"></td>
-            <input type="hidden" name="url" th:value="${urlINfomation.url}">
-        </form>
-        </form>
-        <h2>タグの選択</h2>
-        
-        <h2>タグの追加</h2>
-        <form action="haruContloller.java" method="post">
-            <td th:text="${urlINfomation.tag}"></td>
-            <input type="hidden" name="tag" th:value="${urlINfomation.tag}">
-        </form>
-    </tr>
+    <form action="#" th:action="@{/addurl}" th:object="${UrlInfomation}" method="post">
+        <p>name:<input type="checkbox" th:field="*{name}" /></p>
+    </form>
     </body>
 </html>
