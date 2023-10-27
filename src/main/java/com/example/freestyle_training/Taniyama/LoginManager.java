@@ -30,6 +30,7 @@ public class LoginManager {
             if (file.exists()) {
                 FileReader fr = new FileReader(file);
                 BufferedReader br = new BufferedReader(fr);
+
                 String content;
                 while ((content = br.readLine()) != null) {
                     String[] spritContent = content.split("_");
@@ -54,7 +55,6 @@ public class LoginManager {
         } catch (IOException e) {
 
         }
-
         return AccountCheckResult.other;
     }
 }

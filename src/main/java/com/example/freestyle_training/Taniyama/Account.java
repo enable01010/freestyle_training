@@ -8,6 +8,7 @@ public class Account {
     private String passward;
     private List<UrlInfomation> urlList;
     private List<Memo> memoList;
+    private String temp;
 
     public Account() {
         urlList = new ArrayList<UrlInfomation>();
@@ -15,6 +16,13 @@ public class Account {
     }
 
     // #region ゲッターセッター
+    public String getTemp() {
+        return temp;
+    }
+
+    public void setTemp(String temp) {
+        this.temp = temp;
+    }
 
     public String getName() {
         return name;
@@ -36,12 +44,27 @@ public class Account {
         return urlList;
     }
 
+    public void setUrlList(List<UrlInfomation> urlList) {
+        this.urlList = urlList;
+    }
+
     public void addUrlList(UrlInfomation add) {
         urlList.add(add);
     }
 
     public List<Memo> getMemoList() {
         return memoList;
+    }
+
+    public void setMemoList(List<Memo> memoList) {
+        this.memoList = memoList;
+    }
+
+    public void setMemoList(Memo[] memoList) {
+        this.memoList = new ArrayList<Memo>();
+        for (int i = 0; i < memoList.length; i++) {
+            this.memoList.add(memoList[i]);
+        }
     }
 
     public void addMemoList(Memo add) {

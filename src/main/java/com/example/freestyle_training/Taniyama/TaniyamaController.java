@@ -31,7 +31,10 @@ public class TaniyamaController {
     @RequestMapping(path = "/login")
     public String Login(@ModelAttribute Account account, Model model) throws IOException {
 
+        // アカウントの名前とパスワードのチェック
         AccountCheckResult result = LoginManager.getInstance().accountCheck(account);
+
+        // 結果を元に処理
         if (result == AccountCheckResult.success) {
             return "Taniyama/DebugStart";
         } else {
@@ -62,8 +65,16 @@ public class TaniyamaController {
     @RequestMapping(path = "/memoPage")
     public String memoPageRequest(@ModelAttribute Account account, Model model) throws IOException {
 
+        MemoManager.getInstance().memoPageDataDownLoad(account);
+
         model.addAttribute("Account", account);
 
-        return "Taniyama/DebugStart";
+        return "Taniyama/MemoPage";
+    }
+
+    @RequestMapping(path = "/memoSave")
+    public void memoSaveRequest(@ModelAttribute Account account, Model model) throws IOException {
+
+        System.out.println(account.getName());
     }
 }
