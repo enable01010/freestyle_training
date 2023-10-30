@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class LoginManager {
     // #region シングルトン
     static private LoginManager instance;
@@ -56,5 +59,29 @@ public class LoginManager {
 
         }
         return AccountCheckResult.other;
+    }
+
+    public Account ChengeJsonDataToAccount(String accountData) {
+        Account account = new Account();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode json = mapper.readTree(accountData);
+
+            // Jsonデータの処理
+            account.setName(json.get("name").textValue());
+            account.setPassward(json.get("passward").textValue());
+            JsonNode memoListJson = json.get("memoList");
+            JsonNode current = memoListJson.get(0);
+            for (int i = 0; (current = memoListJson.get(i)) != null; i++) {
+                Memo memo = new Memo();
+                memo.setDate(current.get("date").textValue());
+                memo.setText(current.get("text").textValue());
+                account.setMemoList(memo);
+            }
+        } catch (Exception e) {
+        }
+
+        return account;
     }
 }

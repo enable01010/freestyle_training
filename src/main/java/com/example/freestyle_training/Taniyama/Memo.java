@@ -6,7 +6,7 @@ public class Memo {
 
     // #region ゲッターセッター
     public String getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(String date) {
@@ -14,7 +14,7 @@ public class Memo {
     }
 
     public String getText() {
-        return text;
+        return this.text;
     }
 
     public void setText(String text) {

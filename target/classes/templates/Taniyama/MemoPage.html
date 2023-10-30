@@ -11,7 +11,11 @@
             var passward;
             var memoList;
             var nowSelectNumber = -1;
-            var isChanged = false;
+            var nouNumber = -1;
+            var memoData = {
+                date:String,
+                text:String,
+            };
 
             function openMemo(i){
                 if(nowSelectNumber != -1)
@@ -32,11 +36,10 @@
             //起動時の処理
             function startFunc()
             {
-                alert("開始");
                 account = /*[[${Account}]]*/ "Account";
-                name =/*[[${Account.getName()}]]*/ "Account.name";
-                passward = /*[[${Account.getPassward()}]]*/"Account.passward";
-                memoList = /*[[${Account.getMemoList()}]]*/"Account.memoList";
+                name = /*[[${Account.getName()}]]*/ "name";
+                passward = /*[[${Account.getPassward()}]]*/ "passward";
+                memoList = /*[[${Account.getMemoList()}]]*/"MemoList";
             }
 
             //終了時の処理
@@ -44,24 +47,52 @@
                 
                 if(isChanged)
                 {
+                    if(nowSelectNumber != -1)
+                    {
+                        memoList[nowSelectNumber].text = document.getElementById("nowSelectText").value;
+                    }
+
                     var formData = new FormData();
+                    let accountData = {
+                        name:this.name,
+                        passward:this.passward,
+                        memoList:this.memoList,
+                    };
+                    formData.append('account',JSON.stringify(accountData));
                     
-                    formData.append("name",name);
-                    formData.append("passward",passward);
-                    Object.keys(memoList).forEach(key =>{
-                        const value = memoList[key];
-                        formData.append('memeList[][key]',value['date']);
-                        formData.append('memeList[][text]',value['text']);
-                    })
-
-                    
-                    formData.append("temp",memoList);
-
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST","http://localhost:8080/memoSave");
                     xhr.send(formData);
                 }
                 
+            }
+
+            function addToday(){
+                isChanged = true;
+
+                if(nowSelectNumber != -1)
+                {
+                    memoList[nowSelectNumber].text = document.getElementById("nowSelectText").value;
+                }
+
+                if(nowSelectNumber != -1)
+                    {
+                        memoList[nowSelectNumber].text = document.getElementById("nowSelectText").value;
+                    }
+
+                    var formData = new FormData();
+                    let accountData = {
+                        name:this.name,
+                        passward:this.passward,
+                        memoList:this.memoList,
+                    };
+                    formData.append('account',JSON.stringify(accountData));
+                    
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST","http://localhost:8080/memoAddToday",false);
+                    xhr.send(formData);
+
+                    location.reload()
             }
 
         </script>
@@ -73,7 +104,7 @@
         <div th:object="${Account}">
             <table border="1" align="left">
                 <tr>
-                    <th><input type="submit" value="当日追加"></th>
+                    <th><input type="submit" value="当日追加" onClick="addToday()"></th>
                 </tr>
                 <th:block th:each="i : ${#numbers.sequence(0,Account.getMemoList().size() - 1)}">
                     <tr>
@@ -89,7 +120,7 @@
                     <th id="nowSelectDate">日付けを選択してください</th>
                 </tr>
                 <tr>
-                    <td><textarea id="nowSelectText" name="remarks" rows="50" cols="200"></textarea></td>
+                    <td><textarea id="nowSelectText" name="remarks" rows="50" cols="150"></textarea></td>
                 </tr>
             </table>
 
