@@ -3,8 +3,55 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
     <script th:inline="javascript"></script>
     <head>
-        <meta charset = "UTF-8">
+        <meta charset="UTF-8">
         <title></title>
+        <link rel="stylesheet" href="index.css">
+        <style>
+            .container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); 
+                grid-template-rows: repeat(3, 1fr);    
+                gap: 10px; /* グリッド間の隙間 */
+            }
+            .inline-block {
+                background-color: black;
+                color: white;
+                font-size: 30px;
+                padding: 20px;
+                margin: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+        </style>
     </head>
 
+    <body>
+        <div style="background-color: #DDD; padding: 30px; text-align: center;">
+        <div class="container">
+            <div class="inline-block">
+                gather
+            </div>
+            <div class="inline-block">
+                htttps:
+            </div>
+            <div class="inline-block">
+                gather
+            </div>
+            <div class="inline-block">
+                htttps:
+            </div>
+            <div class="inline-block">
+                gather
+            </div>
+            <div class="inline-block">
+                htttps:
+            </div>
+        </div>
+    </div>
+    </body>
+    <footer>
+        <br><a href = "end"> サーバーを終了する</a>
+    </footer>
 </html>

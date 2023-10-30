@@ -1,14 +1,17 @@
 package com.example.freestyle_training.Taniyama;
 
 import java.util.List;
+
+import jakarta.validation.Valid;
 import java.util.ArrayList;
 
 public class Account {
     private String name;
     private String passward;
+    @Valid
     private List<UrlInfomation> urlList;
+    @Valid
     private List<Memo> memoList;
-    private String temp;
 
     public Account() {
         urlList = new ArrayList<UrlInfomation>();
@@ -16,14 +19,6 @@ public class Account {
     }
 
     // #region ゲッターセッター
-    public String getTemp() {
-        return temp;
-    }
-
-    public void setTemp(String temp) {
-        this.temp = temp;
-    }
-
     public String getName() {
         return name;
     }
@@ -67,8 +62,16 @@ public class Account {
         }
     }
 
-    public void addMemoList(Memo add) {
+    public void setMemoList(Memo add) {
+        if (memoList == null) {
+            memoList = new ArrayList<Memo>();
+        }
+
         memoList.add(add);
+    }
+
+    public void setMemoList(String memo) {
+
     }
     // #endregion
 }

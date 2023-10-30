@@ -5,8 +5,10 @@ import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class TaniyamaController {
@@ -65,7 +67,7 @@ public class TaniyamaController {
     @RequestMapping(path = "/memoPage")
     public String memoPageRequest(@ModelAttribute Account account, Model model) throws IOException {
 
-        MemoManager.getInstance().memoPageDataDownLoad(account);
+        MemoManager.getInstance().memoOpen(account);
 
         model.addAttribute("Account", account);
 
@@ -73,8 +75,22 @@ public class TaniyamaController {
     }
 
     @RequestMapping(path = "/memoSave")
-    public void memoSaveRequest(@ModelAttribute Account account, Model model) throws IOException {
+    public void memoSaveRequest(@RequestParam("account") String accountData, Model model) throws IOException {
 
-        System.out.println(account.getName());
+        Account account = LoginManager.getInstance().ChengeJsonDataToAccount(accountData);
+
+        // データの保存
+        MemoManager.getInstance().memoSave(account);
     }
+
+    @RequestMapping(path = "/memoAddToday")
+    public String memoAddTodayRequest(@RequestParam("account") String accountData, Model model) throws IOException {
+
+        memoSaveRequest(accountData, model);
+        Account account = LoginManager.getInstance().ChengeJsonDataToAccount(accountData);
+        MemoManager.getInstance().memoAdd(account);
+        model.addAttribute("Account", account);
+        return "Taniyama/MemoPage";
+    }
+
 }
