@@ -10,10 +10,13 @@
     <body>
     <h2>基本情報</h2>
     <form action="#" th:action="@{/addurl}" th:object="${UrlInfomation}" method="post">
-        <p>name:<input type="text" th:field="*{name}" /> URL:<input type="text" th:field="*{url}" /></p>
-        <h2>基本情報</h2>
+        <p>name:<input type="text" th:field="*{name}" /> <!--<input type="text" th:field="*{url}" />--></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+    <!--<h2>基本情報</h2>
     <form action="#" th:action="@{/addurl}" th:object="${UrlInfomation}" method="post">
         <p>name:<input type="checkbox" th:field="*{name}" /></p>
-    </form>
+        <p><input type="submit" value="Submit"/></p>
+    </form>-->
     </body>
 </html>
