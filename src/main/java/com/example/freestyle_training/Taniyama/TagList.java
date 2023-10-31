@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TagList {
-    private List<String> tagNameList;
-
+    public List<String> tagNameList;
+    
     public TagList() {
         tagNameList = new ArrayList<String>();
     }
