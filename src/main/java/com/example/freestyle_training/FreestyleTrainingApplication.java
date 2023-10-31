@@ -11,5 +11,4 @@ public class FreestyleTrainingApplication {
 		System.out.println("起動完了しました");
 		System.out.println("http://localhost:8080/DebugStart");
 	}
-
 }
