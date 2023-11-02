@@ -52,6 +52,7 @@ public class MemoManager {
         } catch (IOException e) {
 
         }
+        account.memoSort();
     }
 
     public void memoSave(Account account) {

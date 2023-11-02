@@ -18,6 +18,92 @@ public class Account {
         memoList = new ArrayList<Memo>();
     }
 
+    public void memoSort() {
+        if (memoList == null)
+            return;
+
+        // 日付けを年・月・日に分割
+        int memoSize = memoList.size();
+        String[][] days = new String[memoSize][3];
+        for (int i = 0; i < memoSize; i++) {
+            days[i] = memoList.get(i).getDate().split("_");
+            days[i][2] = days[i][2].replace(".txt", "");
+        }
+
+        // 文字列→数字変換
+        int[][] daysInt = new int[memoSize][4];
+        for (int i = 0; i < memoSize; i++) {
+            for (int j = 0; j < 3; j++) {
+                daysInt[i][j] = Integer.parseInt(days[i][j]);
+            }
+            daysInt[i][3] = i;
+        }
+
+        // ソート年
+        for (int i = 0; i < memoSize; i++) {
+            int maxValue = daysInt[i][0];
+            int nowNumber = i;
+            for (int j = i + 1; j < memoSize; j++) {
+                if (maxValue < daysInt[j][0]) {
+                    nowNumber = j;
+                    maxValue = daysInt[j][0];
+                }
+            }
+
+            int[] temp = daysInt[i];
+            daysInt[i] = daysInt[nowNumber];
+            daysInt[nowNumber] = temp;
+        }
+
+        // ソート月
+        for (int i = 0; i < memoSize; i++) {
+            int maxValue = daysInt[i][1];
+            int nowNumber = i;
+
+            for (int j = i + 1; j < memoSize; j++) {
+                if (daysInt[i][0] != daysInt[j][0])
+                    break;
+
+                if (maxValue < daysInt[j][1]) {
+                    nowNumber = j;
+                    maxValue = daysInt[j][1];
+                }
+            }
+
+            int[] temp = daysInt[i];
+            daysInt[i] = daysInt[nowNumber];
+            daysInt[nowNumber] = temp;
+        }
+
+        // ソート日
+        for (int i = 0; i < memoSize; i++) {
+            int maxValue = daysInt[i][2];
+            int nowNumber = i;
+
+            for (int j = i + 1; j < memoSize; j++) {
+                if (daysInt[i][0] != daysInt[j][0] || daysInt[i][1] != daysInt[j][1])
+                    break;
+
+                if (maxValue < daysInt[j][2]) {
+                    nowNumber = j;
+                    maxValue = daysInt[j][2];
+                }
+            }
+
+            int[] temp = daysInt[i];
+            daysInt[i] = daysInt[nowNumber];
+            daysInt[nowNumber] = temp;
+
+        }
+
+        // 入れ直し
+        List<Memo> tempMemos = new ArrayList<Memo>();
+        for (int i = 0; i < memoSize; i++) {
+            tempMemos.add(memoList.get(daysInt[i][3]));
+        }
+        memoList = tempMemos;
+    }
+
     // #region ゲッターセッター
     public String getName() {
         return name;
