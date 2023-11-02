@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+    <script th:inline="javascript"></script>
+    <head>
+        <meta charset = "UTF-8">
+        <script th:inline="javascript">
+            //グローバル変数
+            var account;
+            var name;
+            var passward;
+            var memoList;
+            var nowSelectNumber = -1;
+            var nouNumber = -1;
+            var memoData = {
+                date:String,
+                text:String,
+            };
+
+            function openMemo(i){
+                if(nowSelectNumber != -1)
+                {
+                    memoList[nowSelectNumber].text = document.getElementById("nowSelectText").value;
+                }
+
+                var memo = memoList[i];
+                var date = memo.date;
+                var text = memo.text;
+                document.getElementById("nowSelectDate").innerText= date;
+                document.getElementById("nowSelectText").value = text;
+
+                nowSelectNumber = i;
+                isChanged = true;
+            }
+
+            //起動時の処理
+            function startFunc()
+            {
+                account = /*[[${Account}]]*/ "Account";
+                name = /*[[${Account.getName()}]]*/ "name";
+                passward = /*[[${Account.getPassward()}]]*/ "passward";
+                memoList = /*[[${Account.getMemoList()}]]*/"MemoList";
+            }
+
+            //終了時の処理
+            window.onbeforeunload = function(event){
+                
+                if(isChanged)
+                {
+                    if(nowSelectNumber != -1)
+                    {
+                        memoList[nowSelectNumber].text = document.getElementById("nowSelectText").value;
+                    }
+
+                    var formData = new FormData();
+                    let accountData = {
+                        name:this.name,
+                        passward:this.passward,
+                        memoList:this.memoList,
+                    };
+                    formData.append('account',JSON.stringify(accountData));
+                    
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST","http://localhost:8080/memoSave");
+                    xhr.send(formData);
+                }
+                
+            }
+
+            function addToday(){
+                isChanged = true;
+
+                if(nowSelectNumber != -1)
+                {
+                    memoList[nowSelectNumber].text = document.getElementById("nowSelectText").value;
+                }
+
+                if(nowSelectNumber != -1)
+                    {
+                        memoList[nowSelectNumber].text = document.getElementById("nowSelectText").value;
+                    }
+
+                    var formData = new FormData();
+                    let accountData = {
+                        name:this.name,
+                        passward:this.passward,
+                        memoList:this.memoList,
+                    };
+                    formData.append('account',JSON.stringify(accountData));
+                    
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST","http://localhost:8080/memoAddToday",false);
+                    xhr.send(formData);
+
+                    location.reload()
+            }
+
+        </script>
+        <title>メモ</title>
+    </head>
+
+    <body onload="startFunc();">
+        
+        <div th:object="${Account}">
+            <table border="1" align="left">
+                <tr>
+                    <th><input type="submit" value="当日追加" onClick="addToday()"></th>
+                </tr>
+                <th:block th:each="i : ${#numbers.sequence(0,Account.getMemoList().size() - 1)}">
+                    <tr>
+
+                        <td><input type="submit" th:value="${Account.getMemoList().get(i).getDate()}" th:onclick="openMemo([[${i}]])"></td>
+                        <!-- <td th:text="${memo.date}"></td> -->
+                    </tr>
+            </th:block>
+            </table>
+            
+            <table>
+                <tr>
+                    <th id="nowSelectDate">日付けを選択してください</th>
+                </tr>
+                <tr>
+                    <td><textarea id="nowSelectText" name="remarks" rows="50" cols="150"></textarea></td>
+                </tr>
+            </table>
+
+        </div>
+       
+        <a href = "http://localhost:8080/loginPage">ログイン</a><br>
+
+
+        <form action="#" th:action="@{/memoSave}" th:object="${Account}" method="post" name="memoSave">
+            <input type="hidden" th:field="*{name}" value="*{name}">
+            <input type="hidden" th:field="*{passward}" value="*{passward}">
+            <input id="memoList" type="hidden" th:field="*{memoList}" value="*{memoList}">
+            <input type="submit" value="メモ" />
+        </form><br>
+    </body>
+
+    <footer>
+        <br><a href = "end"> サーバーを終了する</a>
+    </footer>
+</html>

@@ -21,11 +21,28 @@ import org.springframework.ui.Model;
 @Controller
 public class haruContloller {
     @RequestMapping(path = "/addurl")
-    public String sample(@ModelAttribute Account account, Model model) throws IOException {
+    public String addrulPageRequest(@ModelAttribute Account account, Model model) throws IOException {
         UrlInfomation urlInfo = new UrlInfomation();
+
+        urlInfo.addTag("朝礼");
+        urlInfo.addTag("夕礼");
+        urlInfo.addTag("ギャザー");
+
         model.addAttribute("Account", account);
-        // urlInfo.addTag(urlInfo.tag_Str);
+        model.addAttribute("UrlInfomation", urlInfo);
+        model.addAttribute("SelectTag", new SelectTag());
         return "Hirata/addurl";
+    }
+
+    @RequestMapping(path = "/submit")
+    public void submitData(@ModelAttribute Account account, Model model, @ModelAttribute UrlInfomation urlInfo)
+            throws IOException {
+        System.out.println(urlInfo.getName());
+        System.out.println(urlInfo.getUrl());
+        for (int i = 0; i < urlInfo.getTag().size(); i++) {
+            System.out.println(urlInfo.getTag().get(i));
+        }
+
     }
 
 }

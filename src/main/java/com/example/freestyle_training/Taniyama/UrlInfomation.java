@@ -33,8 +33,16 @@ public class UrlInfomation {
         return tag;
     }
 
+    public void setTag(List<String> nametag) {
+        tag = nametag;
+    }
+
     public void addTag(String add) {
         tag.add(add);
+    }
+
+    public int countTag() {
+        return tag.size();
     }
 
     // #endregion
