@@ -21,12 +21,16 @@
         <a href = "http://localhost:8080/addurl">URLの追加</a>
         <h2>黒地</h2>
         <a href = "http://localhost:8080/addTag">タグ</a><br>
-        <h2>山川</h2>
-
+        <h2>山川</h2>        
+        <form action="#" th:action="@{/urlInfomation}" th:object="${Account}" method="post" name="urlInfomation">
+            <input type="hidden" th:field="*{name}" value="*{name}">
+            <input type="hidden" th:field="*{passward}" value="*{passward}">            
+            <input type="submit" value="URL一覧" />
+        </form>
         <div th:object="${Account}">
             <h2>アカウント情報</h2>
             ユーザー名:<div th:text="*{name}"></div>
-            パスワード:<div th:text="*{passward}"></div>
+            パスワード:<div th:text="*{passward}"></div>            
         </div>
         <a href = "end"> サーバーを終了する</a>
     </body>
