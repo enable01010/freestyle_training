@@ -1,5 +1,7 @@
 package com.example.freestyle_training.haru;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -37,12 +39,20 @@ public class haruContloller {
     @RequestMapping(path = "/submit")
     public void submitData(@ModelAttribute Account account, Model model, @ModelAttribute UrlInfomation urlInfo)
             throws IOException {
+        // File detaFile = new File("src\\main\\db\\UrlData.txt");
+        // FileWriter fileWriter = new FileWriter(detaFile);
+        // fileWriter.write(urlInfo.getName());
+        // fileWriter.write(urlInfo.getName());
+        // for (int i = 0; i < urlInfo.getTag().size(); i++) {
+        // fileWriter.write(urlInfo.getTag().get(i));
+        // }
+        // fileWriter.write("\r\n");
+        // fileWriter.close();
         System.out.println(urlInfo.getName());
         System.out.println(urlInfo.getUrl());
         for (int i = 0; i < urlInfo.getTag().size(); i++) {
             System.out.println(urlInfo.getTag().get(i));
         }
-
     }
 
 }
