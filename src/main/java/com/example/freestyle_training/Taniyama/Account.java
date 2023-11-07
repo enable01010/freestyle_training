@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Account {
     private String name;
     private String passward;
-    private String tagname;
+    public String tagname;
     @Valid
     private List<UrlInfomation> urlList;
     @Valid

@@ -8,6 +8,8 @@ public class TagList {
 
     private String tag;
 
+    public Object TagList;
+
     // ゲッタ-セッター
     public String getTag() {
         return tag;

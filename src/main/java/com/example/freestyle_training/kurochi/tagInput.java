@@ -3,8 +3,12 @@ package com.example.freestyle_training.kurochi;
 import java.io.Serializable;
 import java.util.List;
 
+import com.example.freestyle_training.Taniyama.Account;
+
+
 public class tagInput implements Serializable  {
     private String tag;
+
 
     // ゲッタ-セッター
     public String getTag() {

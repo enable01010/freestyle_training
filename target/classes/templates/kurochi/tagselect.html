@@ -8,20 +8,18 @@
     </head>
 
     <body>
-        <form action="#" th:action="@{/tagselect}" th:object="${Account}" method="post">
-            <p>タグの仕分け</p>
-            <input type="hidden" th:field="*{name}" value="*{name}">
-            <select id="singleSelect" name="*{passward}" th:field = "*{passward}"> 
-              <option value="">---</option>
-              <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
-            </select>
-            <input type="submit" value="Submit" /></p>
-            
-            <div th:object="${Account}">
-              <p class="msg" th:text="*{passward}"></p>
-            </div>
-
-        </form>
+      <form action="#" th:action="@{/tagselect}" th:object="${Account}" method="post">
+        <p>タグの仕分け</p>
+        <input type="hidden" th:field="*{name}" value="*{name}">
+        <select id="singleSelect" name="*{tagname}" th:field = "*{tagname}"> 
+          <option value="">---</option>
+          <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
+        </select>
+        <input type="submit" value="Submit" /></p>
+        
+        <div th:object="${Account}">
+          <p class="msg" th:text="*{tagname}"></p>
+        </div>
     </body>
 </html>
         

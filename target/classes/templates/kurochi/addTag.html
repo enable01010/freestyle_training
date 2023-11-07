@@ -18,27 +18,19 @@
                 <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="${UrlInfomation.tag}" th:text="${UrlInfomation.getTag().get(i)}"/> 
             </th:block>
         </p>
-        <p><input type="submit" value="決定" /> 
-        </form>-->
-
-        <form action="#" th:action="@{/inputTag}" th:object="${Account}" method="post">
-        <p>タグの追加</p>
-        <p>タグ: <input type="text" th:field="*{tagname}" value =""/><input type="submit" value="Submit" /></p>
-        <input type="hidden" th:field="*{name}" value="*{name}">
+        <p><input type="submit" value="決定" /> -->
         </form>
 
-        <form action="#" th:action="@{/tagselect}" th:object="${Account}" method="post">
-          <p>タグの仕分け</p>
-          <input type="hidden" th:field="*{name}" value="*{name}">
-          <select id="singleSelect" name="*{tagname}" th:field = "*{tagname}"> 
-            <option value="">---</option>
-            <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
-          </select>
-          <input type="submit" value="Submit" /></p>
+        <div style ="color:red" th:text="*{tagerrorLog}"></div>
+        <form action="#" th:action="@{/inputTag}" th:object="${Account}" method="post">
+        <p>タグの追加</p>
+        <input type="hidden" th:field="*{name}" value="*{name}">
+        <p>タグ: <input type="text" th:field="*{tagname}" value =""/><input type="submit" value="Submit" /></p>
+        </form>
           
-          <div th:object="${Account}">
-            <p class="msg" th:text="*{tagname}"></p>
-          </div>
+        <div th:object="${Account}">
+          <p class="msg" th:text="*{tagname}"></p>
+        </div>
 
       </form>
     </body>
