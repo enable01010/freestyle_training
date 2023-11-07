@@ -3,7 +3,7 @@
 <script th:inline="javascript"></script>
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" charset="UTF-8">
     <title>URL一覧</title>
 </head>
 
@@ -11,26 +11,35 @@
     <div style="background-color: #DDD; padding: 30px; text-align: center;">
         <!--ボタン処理 -->
         <div style="display: flex; justify-content: center;">
+            <!-----------------------------タグ------------------------------------------->
             <input type="button" onclick="location.href='http://localhost:8080/addTag'"
                 style="font-size: 24px; padding: 30px; margin: 10px;" value="タグ選択">
+            <!----------------------------メモ------------------------------------------>
             <input type="button" onclick="location.href='http://localhost:8080/MemoPage'"
-                style="font-size: 24px; padding: 30px; margin: 10px;" value="メモ">
+                style="font-size: 24px; padding: 30px; margin: 10px;" value="メモ">            
+            <!----------------------------URL追加-------------------------------------->
             <input type="button" onclick="location.href='http://localhost:8080/addurl'"
-                style="font-size: 24px; padding: 30px; margin: 10px;" value="追加">
-            <input type="button" onclick="location.href='http://localhost:8080/urlRevision'"
-                style="font-size: 24px; padding: 30px; margin: 10px;" value="変更・削除">
+                style="font-size: 24px; padding: 30px; margin: 10px;" value="追加">            
+            <!----------------------------変更、削除-------------------------------------->
+            <form action="#" th:action="@{/urlRevision}" th:object="${Account}" method="post" name="urlRevision">
+                <input type="hidden" th:field="*{name}" value="*{name}">
+                <input type="hidden" th:field="*{passward}" value="*{passward}">
+                <input type="submit" style="font-size: 24px; padding: 30px; margin: 10px;" value="変更・削除" />
+            </form>
+            <!-----------------------------ログアウト--------------------------------------->
             <input type="button" style="font-size: 24px; padding: 30px; margin: 10px;" value="ログアウト">
 
-        </div>
-        <!--テキスト処理 -->
-        <div style="font-size: 24px; margin-top: 30px; border: 1px solid black; padding: 200px;"></div>
 
+        </div>
+        <!--URL一覧処理 -->
+        <div style="font-size: 30px; margin-top: 30px; border: 1px solid black; padding: 100px;text-align: left;">
+            <th:block th:each="i : ${#numbers.sequence(0,Account.getUrlList().size() - 1)}">
+                <span style="margin-right: 100px;" th:text="${Account.getUrlList.get(i).name}"></span><span
+                    th:text="${Account.getUrlList.get(i).url}"></span>
+                <br><br>
+            </th:block>
+        </div>
     </div>
-    <div th:object="${Account}">
-        <h2>アカウント情報</h2>
-        ユーザー名:<div th:text="*{name}"></div>
-        パスワード:<div th:text="*{passward}"></div>
-    </div>        
 
 </body>
 
