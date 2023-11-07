@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class SelectTag {
-    List<String> nametag;
+    // List<String> nametag;
 
-    public List<String> getNametag() {
-        return nametag;
-    }
+    // public List<String> getNametag() {
+    // return nametag;
+    // }
 }

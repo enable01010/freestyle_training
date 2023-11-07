@@ -7,6 +7,7 @@ public class UrlInfomation {
     private String url;
     private String name;
     private List<String> tag;
+    private List<String> checkTag;
 
     public UrlInfomation() {
         tag = new ArrayList<String>();
@@ -45,5 +46,16 @@ public class UrlInfomation {
         return tag.size();
     }
 
+    public List<String> getCheckTag() {
+        return checkTag;
+    }
+
+    public void setCheckTag(List<String> nametag) {
+        checkTag = nametag;
+    }
+
+    public void clearCheckTag() {
+        checkTag.clear();
+    }
     // #endregion
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+    <script th:inline="javascript"></script>
+    <head>
+        <meta charset = "UTF-8">
+        <title>URLの追加</title>
+    </head>
+
+    <body>
+    <h2>URLの消去</h2>
+    <form action="#" th:action="@{/delete}"  method="post">
+        <p>
+            <input type="checkbox" th:value="aaa"  th:field="${UrlDelete.nameurl}"/>
+        </p>
+        <p><input type="submit" value="決定"/></p>
+    </form>
+    </body>
+</html>

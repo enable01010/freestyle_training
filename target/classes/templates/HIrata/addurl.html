@@ -1,13 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<<<<<<< HEAD
-    <script th:inline="javascript" src="src\main\java\com\example\freestyle_training\haru\for.js">
-       
-    </script>
-=======
     <script th:inline="javascript"></script>
->>>>>>> 6bedd5ddb0f5df5334eaf90cccb128c85e3cffa6
     <head>
         <meta charset = "UTF-8">
         <title>URLの追加</title>
@@ -15,40 +9,18 @@
 
     <body>
     <h2>基本情報</h2>
-<<<<<<< HEAD
     <form action="#" th:action="@{/submit}"  method="post">
+        <!--<div style ="color:red" th:text="${haruContloller.errorLog}"></div>-->
         <input type="hidden" th:field="${Account.name}" value="${Account.name}">
         <input type="hidden" th:field="${Account.passward}" value="${Account.passward}">
         <p>name:<input type="text" th:field="${UrlInfomation.name}" /> URLPath<input type="text" th:field="${UrlInfomation.url}" /></p>
         <h2>タグの選択</h2>
         <p>
             <th:block th:each="i : ${#numbers.sequence(0,UrlInfomation.countTag() - 1)}">
-                <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="${UrlInfomation.tag}" th:text="${UrlInfomation.getTag().get(i)}"/> 
+                <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="${UrlInfomation.checkTag}" th:text="${UrlInfomation.getTag().get(i)}"/> 
             </th:block>
         </p>
-        <p><input type="submit" value="決定" /> 
+        <p><input type="submit" value="決定"/> </p>
     </form>
-    <!--<h2>タグの選択</h2>
-    <form action="#" th:action="@{/addurl}" th:object="${SelectTag}" method="post">
-        <p>
-            <th:block th:each="i : ${#numbers.sequence(0,UrlInfomation.countTag() - 1)}">
-                <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="*{nametag}" th:text="${UrlInfomation.getTag().get(i)}"/> 
-            </th:block>
-        </p>
-    </form>-->
-    <!--<h2>タグの追加</h2>
-    <form action="#" th:action="@{/addtag}" th:object="${AddTag}" method="post">
-        <p>name:<input type="text" th:field="*{nametag}" /><input type="submit" value="Submit"/></p>
-=======
-    <form action="#" th:action="@{/addurl}" th:object="${UrlInfomation}" method="post">
-        <p>name:<input type="text" th:field="*{name}" /> <!--<input type="text" th:field="*{url}" />--></p>
-        <p><input type="submit" value="Submit"/></p>
-    </form>
-    <!--<h2>基本情報</h2>
-    <form action="#" th:action="@{/addurl}" th:object="${UrlInfomation}" method="post">
-        <p>name:<input type="checkbox" th:field="*{name}" /></p>
-        <p><input type="submit" value="Submit"/></p>
->>>>>>> 6bedd5ddb0f5df5334eaf90cccb128c85e3cffa6
-    </form>-->
     </body>
 </html>
