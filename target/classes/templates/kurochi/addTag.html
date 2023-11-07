@@ -9,32 +9,37 @@
 
     <body>
         <!--<form action="#" th:action="@{/inputTag}" th:object="${tagInput}" method="post">
-        <p>タグの選択</p>
+        <input type="hidden" th:field="${Account.name}" value="${Account.name}">
+        <input type="hidden" th:field="${Account.passward}" value="${Account.passward}">
+        <p>name:<input type="text" th:field="${UrlInfomation.name}" /> URLPath<input type="text" th:field="${UrlInfomation.url}" /></p>
+        <h2>タグの選択</h2>
+        <p>
             <th:block th:each="i : ${#numbers.sequence(0,UrlInfomation.countTag() - 1)}">
                 <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="${UrlInfomation.tag}" th:text="${UrlInfomation.getTag().get(i)}"/> 
             </th:block>
-            <p><input type="submit" value="Submit" /></p>
+        </p>
+        <p><input type="submit" value="決定" /> 
         </form>-->
 
         <form action="#" th:action="@{/inputTag}" th:object="${Account}" method="post">
         <p>タグの追加</p>
-        <p>タグ: <input type="text" th:field="*{passward}" /><input type="submit" value="Submit" /></p>
+        <p>タグ: <input type="text" th:field="*{tagname}" value =""/><input type="submit" value="Submit" /></p>
         <input type="hidden" th:field="*{name}" value="*{name}">
         </form>
 
         <form action="#" th:action="@{/tagselect}" th:object="${Account}" method="post">
-        <p>タグの仕分け</p>
-        <input type="hidden" th:field="*{name}" value="*{name}">
-        <select id="singleSelect" name="*{passward}" th:field = "*{passward}"> 
-          <option value="">---</option>
-          <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
+          <p>タグの仕分け</p>
+          <input type="hidden" th:field="*{name}" value="*{name}">
+          <select id="singleSelect" name="*{tagname}" th:field = "*{tagname}"> 
+            <option value="">---</option>
+            <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
+          </select>
           <input type="submit" value="Submit" /></p>
-        </select>
-        
-        <div th:object="${Account}">
-          <p class="msg" th:text="*{passward}"></p>
-        </div>
+          
+          <div th:object="${Account}">
+            <p class="msg" th:text="*{tagname}"></p>
+          </div>
 
-        </form>
+      </form>
     </body>
 </html>

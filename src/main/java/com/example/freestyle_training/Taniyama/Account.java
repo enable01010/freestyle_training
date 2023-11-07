@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Account {
     private String name;
     private String passward;
+    private String tagname;
     @Valid
     private List<UrlInfomation> urlList;
     @Valid
@@ -158,6 +159,14 @@ public class Account {
 
     public void setMemoList(String memo) {
 
+    }
+
+    public String getTagname() {
+        return tagname;
+    }
+
+    public void setTagname(String value) {
+        tagname = value;
     }
     // #endregion
 }

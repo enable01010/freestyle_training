@@ -23,10 +23,16 @@
         <a href = "http://localhost:8080/addTag">タグ</a><br>
         
         <form action="#" th:action="@{/addTag}" th:object="${Account}" method="post" name="memoPageForm">
-        <input type="hidden" th:field="*{name}" value="*{name}">
-        <input type="hidden" th:field="*{passward}" value="">
-        <input type="submit" value="タグ" />
-        </form>
+            <input type="hidden" th:field="*{name}" value="*{name}">
+            <input type="hidden" th:field="*{passward}" value="">
+            <input type="submit" value="タグ" />
+        </form><br>
+
+        <form action="#" th:action="@{/tagselect}" th:object="${Account}" method="post" name="memoPageForm">
+            <input type="hidden" th:field="*{name}" value="*{name}">
+            <input type="hidden" th:field="*{passward}" value="*{passward}">
+            <input type="submit" value="タグの絞り込み" />
+        </form><br>
 
 
         <h2>山川</h2>

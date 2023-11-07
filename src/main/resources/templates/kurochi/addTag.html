@@ -9,11 +9,16 @@
 
     <body>
         <!--<form action="#" th:action="@{/inputTag}" th:object="${tagInput}" method="post">
-        <p>タグの選択</p>
+        <input type="hidden" th:field="${Account.name}" value="${Account.name}">
+        <input type="hidden" th:field="${Account.passward}" value="${Account.passward}">
+        <p>name:<input type="text" th:field="${UrlInfomation.name}" /> URLPath<input type="text" th:field="${UrlInfomation.url}" /></p>
+        <h2>タグの選択</h2>
+        <p>
             <th:block th:each="i : ${#numbers.sequence(0,UrlInfomation.countTag() - 1)}">
                 <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="${UrlInfomation.tag}" th:text="${UrlInfomation.getTag().get(i)}"/> 
             </th:block>
-            <p><input type="submit" value="Submit" /></p>
+        </p>
+        <p><input type="submit" value="決定" /> 
         </form>-->
 
         <form action="#" th:action="@{/inputTag}" th:object="${Account}" method="post">
@@ -27,7 +32,7 @@
         <input type="hidden" th:field="*{name}" value="*{name}">
         <select id="singleSelect" name="*{passward}" th:field = "*{passward}"> 
           <option value="">---</option>
-          <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
+          <option th:each="item : ${tagNameList}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
           <input type="submit" value="Submit" /></p>
         </select>
         

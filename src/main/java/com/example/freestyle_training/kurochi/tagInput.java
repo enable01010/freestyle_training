@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 public class tagInput implements Serializable  {
-    public List<String> tagNameList;
     private String tag;
 
     // ゲッタ-セッター
