@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+
+import com.example.freestyle_training.Yamakawa.URLManager;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -38,7 +40,9 @@ public class TaniyamaController {
 
         // 結果を元に処理
         if (result == AccountCheckResult.success) {
-            return "Taniyama/DebugStart";
+            URLManager.getInstance().getUrlList(account);
+            model.addAttribute("Account", account);
+            return "Yamakawa/URLInfomation";
         } else {
 
             String errorLog = "";
