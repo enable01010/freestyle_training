@@ -33,7 +33,7 @@ public class URLManager {
 
     public void getUrlList(Account account) {
         try {
-            File file = new File("C:\\freestyle_training\\src\\main\\db\\master\\url\\urlInfomation.txt");
+            File file = new File("src\\main\\db\\master\\url\\urlInfomation.txt");
 
             if (!file.exists()) {
                 System.out.print("ファイルが開けません");
@@ -70,7 +70,7 @@ public class URLManager {
 
     public void urlSettingChange(Account account, String name, String url, int row) {
         try {
-           File file = new File("C:\\freestyle_training\\src\\main\\db\\master\\url\\urlInfomation.txt");
+           File file = new File("src\\main\\db\\master\\url\\urlInfomation.txt");
 
             if (!file.exists()) {
                 System.out.print("ファイルが開けません");
