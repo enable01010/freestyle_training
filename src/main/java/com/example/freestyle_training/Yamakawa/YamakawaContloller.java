@@ -20,9 +20,11 @@ import org.springframework.ui.Model;
 @Controller
 public class YamakawaContloller {
     @RequestMapping(path = "/urlInfomation")
-    public String sample(Model model) throws IOException {
+    public String urlSummaryPageRequest(Account account ,Model model) throws IOException {
         
-        return "Yamakawa/URLInfomation";        
+        URLManager.getInstance().getUrlList(account);
+        model.addAttribute("Account", account);
+        return "Yamakawa/URLInfomation";
     }
 
     @RequestMapping(path = "/urlRevision")
