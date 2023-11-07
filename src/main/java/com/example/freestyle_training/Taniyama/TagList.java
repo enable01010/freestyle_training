@@ -5,6 +5,17 @@ import java.util.ArrayList;
 
 public class TagList {
     public List<String> tagNameList;
+
+    private String tag;
+
+    // ゲッタ-セッター
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String value) {
+        tag = value;
+    }
     
     public TagList() {
         tagNameList = new ArrayList<String>();

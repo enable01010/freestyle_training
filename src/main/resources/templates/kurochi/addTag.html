@@ -1,37 +1,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-    <script th:inline="javascript"></script>
+  <script th:inline="javascript"></script>
     <head>
         <meta charset = "UTF-8">
         <title>Tag</title>
     </head>
 
     <body>
-        <form action="#" th:action="@{/inputTag}" th:object="${tagInput}" method="post">
+        <!--<form action="#" th:action="@{/inputTag}" th:object="${tagInput}" method="post">
         <p>タグの選択</p>
+            <th:block th:each="i : ${#numbers.sequence(0,UrlInfomation.countTag() - 1)}">
+                <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="${UrlInfomation.tag}" th:text="${UrlInfomation.getTag().get(i)}"/> 
+            </th:block>
+            <p><input type="submit" value="Submit" /></p>
+        </form>-->
+
+        <form action="#" th:action="@{/inputTag}" th:object="${Account}" method="post">
         <p>タグの追加</p>
-        <p>タグ: <input type="text" th:field="*{tag}" /><input type="submit" value="Submit" /></p>
+        <p>タグ: <input type="text" th:field="*{passward}" /><input type="submit" value="Submit" /></p>
+        <input type="hidden" th:field="*{name}" value="*{name}">
         </form>
 
-            <!-- <input type="text" id="text_name">
-            <input type="button" value="追加" onclick="addName()">
-            <script th:inline="javascript">
-            var namelist = [];
-            function addName(){
-              var input = document.getElementById("text_name");
-              var output = document.getElementById("output");
-              namelist.push(input.value);// 配列に要素を追加
-              <input type="checkbox" th:value="${tag}" th:text = "${tag}" th:field ="*{alltag}" />
-              output.innerHTML = "";
-              
-              // 配列の要素を先頭から順番にすべて出力
-              var i = 0;
-              while(i < namelist.length){		           
-                output.innerHTML += namelist[i] + "<br>";
-                i = i + 1;
-              }
-            }
-            </script>-->
+        <form action="#" th:action="@{/tagselect}" th:object="${Account}" method="post">
+        <p>タグの仕分け</p>
+        <input type="hidden" th:field="*{name}" value="*{name}">
+        <select id="singleSelect" name="*{passward}" th:field = "*{passward}"> 
+          <option value="">---</option>
+          <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
+          <input type="submit" value="Submit" /></p>
+        </select>
+        
+        <div th:object="${Account}">
+          <p class="msg" th:text="*{passward}"></p>
+        </div>
+
+        </form>
     </body>
 </html>
