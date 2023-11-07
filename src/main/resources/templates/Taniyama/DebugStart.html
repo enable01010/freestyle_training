@@ -21,7 +21,17 @@
         <a href = "http://localhost:8080/addurl">URLの追加</a>
         <h2>黒地</h2>
         <a href = "http://localhost:8080/addTag">タグ</a><br>
-        <h2>山川</h2>
+        <form action="#" th:action="@{/addTag}" th:object="${Account}" method="post" name="memoPageForm">
+            <input type="hidden" th:field="*{name}" value="*{name}">
+            <input type="hidden" th:field="*{passward}" value="">
+            <input type="submit" value="タグ" />
+        </form>    
+        <h2>山川</h2>        
+        <form action="#" th:action="@{/urlInfomation}" th:object="${Account}" method="post" name="urlInfomation">
+            <input type="hidden" th:field="*{name}" value="*{name}">
+            <input type="hidden" th:field="*{passward}" value="*{passward}">            
+            <input type="submit" value="URL一覧" />
+        </form>
 
         <div th:object="${Account}">
             <h2>アカウント情報</h2>

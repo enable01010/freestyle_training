@@ -1,7 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<<<<<<< HEAD
     <script th:inline="javascript"></script>
+=======
+    <script th:inline="javascript" src="src\main\java\com\example\freestyle_training\haru\for.js">
+       
+    </script>
+>>>>>>> 536eb46633dc0fc09b09cc0a30b9cdb4bc6fc472
     <head>
         <meta charset = "UTF-8">
         <title>URLの追加</title>
@@ -22,5 +28,20 @@
         </p>
         <p><input type="submit" value="決定"/> </p>
     </form>
+<<<<<<< HEAD
+=======
+    <!--<h2>タグの選択</h2>
+    <form action="#" th:action="@{/addurl}" th:object="${SelectTag}" method="post">
+        <p>
+            <th:block th:each="i : ${#numbers.sequence(0,UrlInfomation.countTag() - 1)}">
+                <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="*{nametag}" th:text="${UrlInfomation.getTag().get(i)}"/> 
+            </th:block>
+        </p>
+    </form>-->
+    <!--<h2>タグの追加</h2>
+    <form action="#" th:action="@{/addtag}" th:object="${AddTag}" method="post">
+        <p>name:<input type="text" th:field="*{nametag}" /><input type="submit" value="Submit"/></p>
+    </form>-->
+>>>>>>> 536eb46633dc0fc09b09cc0a30b9cdb4bc6fc472
     </body>
 </html>

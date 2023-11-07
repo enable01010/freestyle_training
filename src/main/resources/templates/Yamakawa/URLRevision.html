@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<script th:inline="javascript"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+
+    <div style="background-color: #DDD; padding: 30px; text-align: left;">
+        <!--ボタン処理 -->
+        <th:block th:each="i : ${#numbers.sequence(0,Account.getUrlList().size() - 1)}">
+            <form action="#" th:action="@{/urlChange}" th:object="${Account}" method="post" name="urlChange">
+                <input type="hidden" name="i" th:value="${i}" />
+                <input type="hidden" name="NAME" th:value="${Account.getUrlList.get(i).name}" />
+                <input type="hidden" name="URL" th:value="${Account.getUrlList.get(i).url}" />
+                <input type="submit" style="margin-right: 100px;"  th:value="${Account.getUrlList.get(i).name}">
+                <input type="submit" th:value="${Account.getUrlList.get(i).url}">
+                <br><br>
+            </form>
+        </th:block>
+    </div>
+</body>
+
+<footer>
+    <br><a href="end"> サーバーを終了する</a>
+</footer>
+
+</html>

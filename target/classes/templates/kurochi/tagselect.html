@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <script th:inline="javascript"></script>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Tagselect</title>
+    </head>
+
+    <body>
+        <form action="#" th:action="@{/tagselect}" th:object="${Account}" method="post">
+            <p>タグの仕分け</p>
+            <input type="hidden" th:field="*{name}" value="*{name}">
+            <select id="singleSelect" name="*{passward}" th:field = "*{passward}"> 
+              <option value="">---</option>
+              <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
+            </select>
+            <input type="submit" value="Submit" /></p>
+            
+            <div th:object="${Account}">
+              <p class="msg" th:text="*{passward}"></p>
+            </div>
+
+        </form>
+    </body>
+</html>
+        
