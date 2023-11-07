@@ -18,7 +18,8 @@
                 <input type="submit" value="メモ" />
             </form><br>
         <h2>平田</h2>
-        <a href = "http://localhost:8080/addurl">URLの追加</a>
+            <a href = "http://localhost:8080/addurl">URLの追加</a>
+            <a href = "http://localhost:8080/deleteurl">URLの削除</a>
         <h2>黒地</h2>
         <a href = "http://localhost:8080/addTag">タグ</a><br>
         <form action="#" th:action="@{/addTag}" th:object="${Account}" method="post" name="memoPageForm">
