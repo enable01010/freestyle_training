@@ -2,7 +2,6 @@ package com.example.freestyle_training.kurochi;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.freestyle_training.Taniyama.Account;
+import com.example.freestyle_training.Taniyama.AccountCheckResult;
+import com.example.freestyle_training.Taniyama.LoginManager;
 import com.example.freestyle_training.Taniyama.TagList;
 import com.example.freestyle_training.Taniyama.UrlInfomation;
+import com.example.freestyle_training.Yamakawa.URLManager;
 
 import org.springframework.ui.Model;
 
@@ -25,7 +27,7 @@ public class kurochicontroller {
 
     @RequestMapping(path = "/addTag")
     public String tagopen(@ModelAttribute Account account, Model model) throws IOException {
-        
+        String tagerrorLog = "";
         urlInfo.addTag("朝礼");
         urlInfo.addTag("夕礼");
         urlInfo.addTag("ギャザー");
@@ -35,8 +37,10 @@ public class kurochicontroller {
         taglist.addTagNameList("夕礼");
         taglist.addTagNameList("ギャザー");
 
-        selectMap.put("key_A", "選択肢Aは、これですよ");
-        selectMap.put("key_B", "選択肢Ｂは、これですよ");
+
+        
+        selectMap.put("1", "選択肢Aは、これですよ");
+        selectMap.put("2", "選択肢Ｂは、これですよ");
 
         model.addAttribute("tagdata", "");
         model.addAttribute("Account", account);
@@ -45,20 +49,43 @@ public class kurochicontroller {
         model.addAttribute("tagInput", taginput);
 
         model.addAttribute("selectItems",selectMap);    
+        model.addAttribute("errorLog", tagerrorLog);
         return "kurochi/addTag";
     }
 
     @RequestMapping(path = "/inputTag") 
-    public String tagopen2(@ModelAttribute Account account, Model model, UrlInfomation urlInfo,Map<String, String> selectMap,tagInput taginput)throws IOException{
-        //passにtagを一時的に入れる
-        urlInfo.addTag(account.getPassward());
+    public String tagopen2(@ModelAttribute Account account, Model model, UrlInfomation urlInfo,tagInput taginput)throws IOException{
+        String tagerrorLog = "";
 
-        
+        urlInfo.addTag(account.getTagname());
+
+        //tagの例外処理
+        tagcheck result = tagcheckmaneger.getInstance().tagCheckresult(account,urlInfo);
+
+        // 結果を元に処理
+        if (result == tagcheck.success) {
+            tagcheckmaneger.getInstance().tagCheckresult(account,urlInfo);
+            model.addAttribute("Account", account);
+        } else {           
+            switch (result) {
+                case notag:
+                    tagerrorLog = "タグがありません";
+                    break;
+                case nulltag:
+                    tagerrorLog = "同じタグがあります";
+                    break;
+                default:
+                    tagerrorLog = "原因不明のエラーです";
+                    break;
+            }
+
+            model.addAttribute("Account", account);
+            model.addAttribute("errorLog", tagerrorLog);
+        }
+
         urlInfo.addTag("朝礼");
         urlInfo.addTag("夕礼");
         urlInfo.addTag("ギャザー");
-        selectMap.put("key_A", "選択肢Aは、これですよ");
-        selectMap.put("key_B", "選択肢Ｂは、これですよ");
 
         model.addAttribute("tagdata", "");
         model.addAttribute("Account", account);
@@ -66,7 +93,7 @@ public class kurochicontroller {
         model.addAttribute("TagList", taglist);
         model.addAttribute("tagInput", taginput);
 
-        model.addAttribute("selectItems",selectMap); 
+        model.addAttribute("tagerrorLog", tagerrorLog);
 
 
         return "kurochi/addTag";
@@ -75,8 +102,8 @@ public class kurochicontroller {
     @RequestMapping(path = "/tagselect")
     public String selectTag(@ModelAttribute Account account, Model model, UrlInfomation urlInfo,Map<String, String> selectMap)throws IOException{
         Map<String, String> selecttagMap = new LinkedHashMap<String, String>();
-        selecttagMap.put("key_A", "選択肢tag1は、これですよ");
-        selecttagMap.put("key_B", "選択肢tag2は、これですよ");
+        selecttagMap.put("1", "選択肢tag1は、これですよ");
+        selecttagMap.put("2", "選択肢tag2は、これですよ");
         
         model.addAttribute("tagdata", "");
         model.addAttribute("Account", account);
@@ -85,7 +112,6 @@ public class kurochicontroller {
 
         model.addAttribute("TagList", taglist);
         model.addAttribute("selectItems",selecttagMap);
-        return "kurochi/addTag";
+        return "kurochi/tagselect";
     }
-
 }
