@@ -30,7 +30,7 @@ public class haruContloller {
     @RequestMapping(path = "/addurl")
     public String addrulPageRequest(@ModelAttribute Account account, Model model) throws IOException {
         UrlInfomation urlInfo = new UrlInfomation();
-        // String errorLog = "";
+        ErrorMessage errorLog = new ErrorMessage();
 
         urlInfo.addTag("朝礼");
         urlInfo.addTag("夕礼");
@@ -38,28 +38,32 @@ public class haruContloller {
 
         model.addAttribute("Account", account);
         model.addAttribute("UrlInfomation", urlInfo);
-        // model.addAttribute("errorLog", errorLog);
+        model.addAttribute("ErrorMessage", errorLog);
         return "Hirata/addurl";
     }
 
     @RequestMapping(path = "/submit")
     public String submitData(@ModelAttribute Account account, Model model, @ModelAttribute UrlInfomation urlInfo,
-            @ModelAttribute String errorLog)
+            @ModelAttribute ErrorMessage errorLog)
             throws IOException {
+        urlInfo.addTag("朝礼");
+        urlInfo.addTag("夕礼");
+        urlInfo.addTag("ギャザー");
+
         try {
             FileWriter fw = new FileWriter("src\\main\\db\\UrlData.txt", true);
             PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
 
-            // if (urlInfo.getName().equals("") || urlInfo.getName() == null ||
-            // urlInfo.getUrl().equals("")
-            // || urlInfo.getUrl() == null) {
-            // pw.close();
-            // errorLog = "名前またはURLの入力が不十分です";
-            // model.addAttribute("Account", account);
-            // model.addAttribute("errorLog", errorLog);
-            // model.addAttribute("UrlInfomation", urlInfo);
-            // return "Hirata/addurl";
-            // }
+            if (urlInfo.getName().equals("") || urlInfo.getUrl().equals("")) {
+                pw.close();
+                errorLog.setErrorLog("名前またはURLの入力が不十分です");
+                urlInfo.setName(null);
+                urlInfo.setUrl(null);
+                model.addAttribute("Account", account);
+                model.addAttribute("UrlInfomation", urlInfo);
+                model.addAttribute("ErrorMessage", errorLog);
+                return "Hirata/addurl";
+            }
             pw.write(urlInfo.getName());
             pw.write(urlInfo.getUrl());
 
