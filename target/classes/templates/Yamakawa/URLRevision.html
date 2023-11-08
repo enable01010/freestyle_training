@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>URL変更選択フォーム</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
                 <input type="hidden" name="NAME" th:value="${Account.getUrlList.get(i).name}" />
                 <input type="hidden" name="URL" th:value="${Account.getUrlList.get(i).url}" />
                 <input type="submit" style="margin-right: 100px;"  th:value="${Account.getUrlList.get(i).name}">
-                <input type="submit" th:value="${Account.getUrlList.get(i).url}">
+                <div th:text="${Account.getUrlList.get(i).url}"></div>
                 <br><br>
             </form>
         </th:block>
