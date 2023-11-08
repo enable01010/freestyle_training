@@ -40,13 +40,22 @@ public class YamakawaContloller {
     }
 
     @RequestMapping(path = "/urlPage")
-    public String urlSettingPageRequest(@ModelAttribute Account account, Model model,int i, String NAME, String URL)
+    public String urlSettingPageRequest(@ModelAttribute Account account, Model model, int i, String NAME, String URL)
             throws IOException {
-        
-        URLManager.getInstance().urlSettingChange(account, NAME, URL, i);        
+
+        if (NAME.length() == 0 || URL.length() == 0) {
+            model.addAttribute("Account", account);
+            model.addAttribute("i", i);
+            model.addAttribute("URL", URL);
+            model.addAttribute("NAME", NAME);
+            model.addAttribute("errorMessage", "正しい入力がされていません");
+            return "Yamakawa/URLChange";
+        }
+
+        URLManager.getInstance().urlSettingChange(account, NAME, URL, i);
         URLManager.getInstance().getUrlList(account);
-        model.addAttribute("Account", account);        
-        
+        model.addAttribute("Account", account);
+
         return "Yamakawa/URLInfomation";
     }
 
@@ -58,7 +67,7 @@ public class YamakawaContloller {
         model.addAttribute("i", i);
         model.addAttribute("URL", URL);
         model.addAttribute("NAME", NAME);
-
+        model.addAttribute("errorMessage", "");
         return "Yamakawa/URLChange";
     }
 }

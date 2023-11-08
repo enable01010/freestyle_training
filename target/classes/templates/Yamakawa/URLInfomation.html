@@ -34,8 +34,8 @@
         <!--URL一覧処理 -->
         <div style="font-size: 30px; margin-top: 30px; border: 1px solid black; padding: 100px;text-align: left;">
             <th:block th:each="i : ${#numbers.sequence(0,Account.getUrlList().size() - 1)}">
-                <span style="margin-right: 100px;" th:text="${Account.getUrlList.get(i).name}"></span><span
-                    th:text="${Account.getUrlList.get(i).url}"></span>
+                <span style="margin-right: 100px;" th:text="${Account.getUrlList.get(i).name}"></span>
+                <a th:href="${Account.getUrlList.get(i).url}" th:text="${Account.getUrlList.get(i).url}"></a>
                 <br><br>
             </th:block>
         </div>
