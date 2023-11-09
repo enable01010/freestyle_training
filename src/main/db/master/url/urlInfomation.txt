@@ -1,10 +1,5 @@
-gather
-https://
-朝礼、夕礼
-https://fs-training-docs.vercel.app/01-info/08-assembly-start-and-end
-開発線表
-https://docs.google.com/spreadsheets/d/1z5xUPPdvaFI0x0h1uN-7znF2AeyV7NVH6--qc1aKjF8/edit?pli=1#gid=581149704
-研修出席シート
-https://fs-training-docs.vercel.app/01-info/07-weekly-schedule-at-sunday
-フリースタイル研修サイト
-https://fs-training-docs.vercel.app/
+gather_https://_朝礼
+朝礼、夕礼_https://fs-training-docs.vercel.app/01-info/08-assembly-start-and-end_夕礼
+開発線表_https://docs.google.com/spreadsheets/d/1z5xUPPdvaFI0x0h1uN-7znF2AeyV7NVH6--qc1aKjF8/edit?pli=1#gid=581149704_疑似開発
+研修出席シート_https://fs-training-docs.vercel.app/01-info/07-weekly-schedule-at-sunday_朝礼_夕礼
+フリースタイル研修サイト_https://fs-training-docs.vercel.app/

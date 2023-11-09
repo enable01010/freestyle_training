@@ -7,10 +7,32 @@ public class UrlInfomation {
     private String url;
     private String name;
     private List<String> tag;
-    private List<String> checkTag;
 
     public UrlInfomation() {
         tag = new ArrayList<String>();
+    }
+
+    public boolean CheckTag(String tagNeme) {
+
+        int tagLength = tag.size();
+        for (int i = 0; i < tagLength; i++) {
+            if (tag.get(i).equals(tagNeme)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public String getTagName() {
+        String tagNames = "";
+
+        int tagLenght = tag.size();
+        for (int i = 0; i < tagLenght; i++) {
+            tagNames += tag.get(i) + "_";
+        }
+
+        return tagNames;
     }
 
     // #region ゲッターセッター
@@ -46,16 +68,5 @@ public class UrlInfomation {
         return tag.size();
     }
 
-    public List<String> getCheckTag() {
-        return checkTag;
-    }
-
-    public void setCheckTag(List<String> nametag) {
-        checkTag = nametag;
-    }
-
-    public void clearCheckTag() {
-        checkTag.clear();
-    }
     // #endregion
 }

@@ -1,34 +1,23 @@
 package com.example.freestyle_training.haru;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.freestyle_training.Taniyama.Account;
 import com.example.freestyle_training.Taniyama.UrlInfomation;
-import com.example.freestyle_training.haru.UrlDelete;
-
-import org.springframework.context.ApplicationContext;
-
-import jakarta.servlet.ServletException;
 
 import org.springframework.ui.Model;
 
 @Controller
 public class haruContloller {
     @RequestMapping(path = "/addurl")
-    public String addrulPageRequest(@ModelAttribute Account account, Model model) throws IOException {
+    public String urlAddPageRequest(@ModelAttribute Account account, Model model) throws IOException {
         UrlInfomation urlInfo = new UrlInfomation();
         ErrorMessage errorLog = new ErrorMessage();
 
@@ -43,7 +32,7 @@ public class haruContloller {
     }
 
     @RequestMapping(path = "/submit")
-    public String submitData(@ModelAttribute Account account, Model model, @ModelAttribute UrlInfomation urlInfo,
+    public String urlAddRequest(@ModelAttribute Account account, Model model, @ModelAttribute UrlInfomation urlInfo,
             @ModelAttribute ErrorMessage errorLog)
             throws IOException {
         urlInfo.addTag("朝礼");
@@ -67,11 +56,11 @@ public class haruContloller {
             pw.write(urlInfo.getName());
             pw.write(urlInfo.getUrl());
 
-            for (int i = 0; i < urlInfo.getCheckTag().size(); i++) {
-                pw.write(urlInfo.getCheckTag().get(i));
+            for (int i = 0; i < urlInfo.getTag().size(); i++) {
+                pw.write(urlInfo.getTag().get(i));
             }
             pw.write(" \r\n");
-            urlInfo.clearCheckTag();
+            urlInfo.getTag();
             pw.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,7 +81,8 @@ public class haruContloller {
     }
 
     @RequestMapping(path = "/delete")
-    public String deleteurl(@ModelAttribute Account account, Model model, @ModelAttribute UrlDelete urlDelete)
+    public String urlSettingDeleteRequest(@ModelAttribute Account account, Model model,
+            @ModelAttribute UrlDelete urlDelete)
             throws IOException {
         urlDelete.delete();
 

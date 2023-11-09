@@ -7,11 +7,8 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.freestyle_training.Taniyama.Account;
-import com.example.freestyle_training.Taniyama.AccountCheckResult;
-import com.example.freestyle_training.Taniyama.LoginManager;
 import com.example.freestyle_training.Taniyama.TagList;
 import com.example.freestyle_training.Taniyama.UrlInfomation;
 import com.example.freestyle_training.Yamakawa.URLManager;
@@ -52,14 +49,14 @@ public class kurochicontroller {
     }
 
     @RequestMapping(path = "/inputTag")
-    public String tagopen2(@ModelAttribute Account account, Model model, UrlInfomation urlInfo, tagInput taginput)
+    public String tagAddRequest(@ModelAttribute Account account, Model model, UrlInfomation urlInfo, tagInput taginput)
             throws IOException {
         String tagerrorLog = "";
 
         urlInfo.addTag(account.getTagname());
 
         // tagの例外処理
-        tagcheck result = tagcheckmaneger.getInstance().saveTag(account);
+        tagcheck result = URLManager.getInstance().addTag(account);
 
         // 結果を元に処理
         if (result == tagcheck.success) {
@@ -97,8 +94,8 @@ public class kurochicontroller {
     }
 
     @RequestMapping(path = "/tagselect")
-    public String selectTag(@ModelAttribute Account account, Model model, UrlInfomation urlInfo) throws IOException {
-        tagcheckmaneger.getInstance().openTag(account);
+    public String tagRequest(@ModelAttribute Account account, Model model, UrlInfomation urlInfo) throws IOException {
+        URLManager.getInstance().getTag(account);
         Map<String, String> selecttagMap = new LinkedHashMap<String, String>();
         for (int i = 0; i < account.getTagList().size(); i++) {
             selecttagMap.put(Integer.valueOf(i).toString(), account.getTagList().get(i));

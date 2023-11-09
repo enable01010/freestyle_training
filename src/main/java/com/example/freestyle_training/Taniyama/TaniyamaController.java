@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import com.example.freestyle_training.Yamakawa.URLManager;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class TaniyamaController {
@@ -33,7 +31,7 @@ public class TaniyamaController {
     }
 
     @RequestMapping(path = "/login")
-    public String Login(@ModelAttribute Account account, Model model) throws IOException {
+    public String loginRequest(@ModelAttribute Account account, Model model) throws IOException {
 
         // アカウントの名前とパスワードのチェック
         AccountCheckResult result = LoginManager.getInstance().accountCheck(account);
@@ -65,7 +63,6 @@ public class TaniyamaController {
             model.addAttribute("errorLog", errorLog);
             return "Taniyama/LoginPage";
         }
-
     }
 
     @RequestMapping(path = "/memoPage")
