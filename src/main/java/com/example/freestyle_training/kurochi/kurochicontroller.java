@@ -31,14 +31,12 @@ public class kurochicontroller {
         urlInfo.addTag("朝礼");
         urlInfo.addTag("夕礼");
         urlInfo.addTag("ギャザー");
-        //urlInfo.addTag(account.getPassward());
+        // urlInfo.addTag(account.getPassward());
 
         taglist.addTagNameList("朝礼");
         taglist.addTagNameList("夕礼");
         taglist.addTagNameList("ギャザー");
 
-
-        
         selectMap.put("1", "選択肢Aは、これですよ");
         selectMap.put("2", "選択肢Ｂは、これですよ");
 
@@ -48,25 +46,25 @@ public class kurochicontroller {
         model.addAttribute("TagList", taglist);
         model.addAttribute("tagInput", taginput);
 
-        model.addAttribute("selectItems",selectMap);    
+        model.addAttribute("selectItems", selectMap);
         model.addAttribute("errorLog", tagerrorLog);
         return "kurochi/addTag";
     }
 
-    @RequestMapping(path = "/inputTag") 
-    public String tagopen2(@ModelAttribute Account account, Model model, UrlInfomation urlInfo,tagInput taginput)throws IOException{
+    @RequestMapping(path = "/inputTag")
+    public String tagopen2(@ModelAttribute Account account, Model model, UrlInfomation urlInfo, tagInput taginput)
+            throws IOException {
         String tagerrorLog = "";
 
         urlInfo.addTag(account.getTagname());
 
-        //tagの例外処理
-        tagcheck result = tagcheckmaneger.getInstance().tagCheckresult(account,urlInfo);
+        // tagの例外処理
+        tagcheck result = tagcheckmaneger.getInstance().saveTag(account);
 
         // 結果を元に処理
         if (result == tagcheck.success) {
-            tagcheckmaneger.getInstance().tagCheckresult(account,urlInfo);
             model.addAttribute("Account", account);
-        } else {           
+        } else {
             switch (result) {
                 case notag:
                     tagerrorLog = "タグがありません";
@@ -95,23 +93,24 @@ public class kurochicontroller {
 
         model.addAttribute("tagerrorLog", tagerrorLog);
 
-
         return "kurochi/addTag";
     }
 
     @RequestMapping(path = "/tagselect")
-    public String selectTag(@ModelAttribute Account account, Model model, UrlInfomation urlInfo,Map<String, String> selectMap)throws IOException{
+    public String selectTag(@ModelAttribute Account account, Model model, UrlInfomation urlInfo) throws IOException {
+        tagcheckmaneger.getInstance().openTag(account);
         Map<String, String> selecttagMap = new LinkedHashMap<String, String>();
-        selecttagMap.put("1", "選択肢tag1は、これですよ");
-        selecttagMap.put("2", "選択肢tag2は、これですよ");
-        
+        for (int i = 0; i < account.getTagList().size(); i++) {
+            selecttagMap.put(Integer.valueOf(i).toString(), account.getTagList().get(i));
+        }
+
         model.addAttribute("tagdata", "");
         model.addAttribute("Account", account);
         model.addAttribute("UrlInfomation", urlInfo);
         model.addAttribute("tagInput", taginput);
 
         model.addAttribute("TagList", taglist);
-        model.addAttribute("selectItems",selecttagMap);
+        model.addAttribute("selectItems", selecttagMap);
         return "kurochi/tagselect";
     }
 }

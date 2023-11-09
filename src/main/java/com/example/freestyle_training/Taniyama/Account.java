@@ -13,6 +13,7 @@ public class Account {
     private List<UrlInfomation> urlList;
     @Valid
     private List<Memo> memoList;
+    private List<String> tagList;
 
     public Account() {
         urlList = new ArrayList<UrlInfomation>();
@@ -167,6 +168,22 @@ public class Account {
 
     public void setTagname(String value) {
         tagname = value;
+    }
+
+    public List<String> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(String add) {
+        if (tagList == null) {
+            tagList = new ArrayList<String>();
+        }
+
+        tagList.add(add);
+    }
+
+    public void setTagList(List<String> tag) {
+        tagList = tag;
     }
     // #endregion
 }
