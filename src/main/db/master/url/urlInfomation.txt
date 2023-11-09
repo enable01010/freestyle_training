@@ -1,10 +1,10 @@
 gather
 https://
-作業報告書
-https://jgiodspjaifojdiospaiufoepjiaogjiopdjsaiofhiodpsahjigopjiaoshbiopaijofpheiospafd
+朝礼、夕礼
+https://fs-training-docs.vercel.app/01-info/08-assembly-start-and-end
 開発線表
-https://
+https://docs.google.com/spreadsheets/d/1z5xUPPdvaFI0x0h1uN-7znF2AeyV7NVH6--qc1aKjF8/edit?pli=1#gid=581149704
 研修出席シート
-https://
-フリースタイルサイト
-https://
+https://fs-training-docs.vercel.app/01-info/07-weekly-schedule-at-sunday
+フリースタイル研修サイト
+https://fs-training-docs.vercel.app/

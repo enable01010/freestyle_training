@@ -10,9 +10,7 @@
     <body>
     <h2>基本情報</h2>
     <form action="#" th:action="@{/submit}"  method="post">
-        <!--<div style ="color:red" th:text="${haruContloller.errorLog}"></div>-->
-        <input type="hidden" th:field="${Account.name}" value="${Account.name}">
-        <input type="hidden" th:field="${Account.passward}" value="${Account.passward}">
+        <div style ="color:red" th:text="${ErrorMessage.errorLog}"></div>
         <p>name:<input type="text" th:field="${UrlInfomation.name}" /> URLPath<input type="text" th:field="${UrlInfomation.url}" /></p>
         <h2>タグの選択</h2>
         <p>
