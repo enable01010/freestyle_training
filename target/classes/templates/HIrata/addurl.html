@@ -10,12 +10,14 @@
     <body>
     <h2>基本情報</h2>
     <form action="#" th:action="@{/submit}"  method="post">
+        <input type="hidden" th:field="${Account.name}" value="${Account.name}">
+        <input type="hidden" th:field="${Account.passward}" value="${Account.passward}">
         <div style ="color:red" th:text="${ErrorMessage.errorLog}"></div>
-        <p>name:<input type="text" th:field="${UrlInfomation.name}" /> URLPath<input type="text" th:field="${UrlInfomation.url}" /></p>
+        <p>name:<input type="text" th:field="${UrlInfomation.nameUrl}" /> URLPath<input type="text" th:field="${UrlInfomation.url}" /></p>
         <h2>タグの選択</h2>
         <p>
-            <th:block th:each="i : ${#numbers.sequence(0,UrlInfomation.countTag() - 1)}">
-                <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="${UrlInfomation.checkTag}" th:text="${UrlInfomation.getTag().get(i)}"/> 
+            <th:block th:each="i : ${#numbers.sequence(0,Account.getTagList().size() - 1)}">
+                <input type="checkbox" th:value="${Account.getTagList().get(i)}"  th:field="${UrlInfomation.tag}" th:text="${Account.getTagList().get(i)}"/> 
             </th:block>
         </p>
         <p><input type="submit" value="決定"/> </p>

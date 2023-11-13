@@ -44,13 +44,13 @@ public class URLManager {
 
             // .txt読み込み
             BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(file), "UTF-8"));
+                    new InputStreamReader(new FileInputStream(file)));
             String data;
             // １行ずつ読み込み
             while ((data = bufferedReader.readLine()) != null) {
                 String[] urlDataSprits = data.split("_");
                 UrlInfomation urlInfo = new UrlInfomation();
-                urlInfo.setName(urlDataSprits[0]);
+                urlInfo.setNameUrl(urlDataSprits[0]);
                 urlInfo.setUrl(urlDataSprits[1]);
                 for (int i = 2; i < urlDataSprits.length; i++) {
                     urlInfo.addTag(urlDataSprits[i]);
@@ -165,10 +165,12 @@ public class URLManager {
             int urlLength = account.getUrlList().size();
             for (int i = 0; i < urlLength; i++) {
                 UrlInfomation accountUrlInfo = account.getUrlList().get(i);
-                String line = accountUrlInfo.getName() + "_" + accountUrlInfo.getUrl() + accountUrlInfo.getTagName();
+                String line = accountUrlInfo.getNameUrl() + "_" + accountUrlInfo.getUrl() + "_"
+                        + accountUrlInfo.getTagName()
+                        + "\n";
                 fw.write(line);
             }
-            String line = urlInfo.getName() + "_" + urlInfo.getUrl() + urlInfo.getTagName();
+            String line = urlInfo.getNameUrl() + "_" + urlInfo.getUrl() + "_" + urlInfo.getTagName();
             fw.write(line);
 
             fw.close();
@@ -189,7 +191,7 @@ public class URLManager {
 
             // .txt読み込み
             BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(file), "UTF-8"));
+                    new InputStreamReader(new FileInputStream(file)));
             String data;
             StringBuilder fileContent = new StringBuilder();
             int currentLine = 1;
@@ -222,7 +224,7 @@ public class URLManager {
     public void urlDelete(Account account, String deleteName) {
         int urlLength = account.getUrlList().size();
         for (int i = 0; i < urlLength; i++) {
-            if (account.getUrlList().get(i).getName().equals(deleteName)) {
+            if (account.getUrlList().get(i).getNameUrl().equals(deleteName)) {
                 account.getUrlList().remove(i);
                 break;
             }
@@ -235,7 +237,7 @@ public class URLManager {
             urlLength = account.getUrlList().size();
             for (int i = 0; i < urlLength; i++) {
                 UrlInfomation urlInfo = account.getUrlList().get(i);
-                String line = urlInfo.getName() + "_" + urlInfo.getUrl() + urlInfo.getTagName();
+                String line = urlInfo.getNameUrl() + "_" + urlInfo.getUrl() + urlInfo.getTagName();
                 fw.write(line);
             }
 

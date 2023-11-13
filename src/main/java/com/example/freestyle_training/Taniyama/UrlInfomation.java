@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class UrlInfomation {
     private String url;
-    private String name;
+    private String nameUrl;
     private List<String> tag;
 
     public UrlInfomation() {
@@ -44,12 +44,12 @@ public class UrlInfomation {
         this.url = url;
     }
 
-    public String getName() {
-        return name;
+    public String getNameUrl() {
+        return nameUrl;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameUrl(String name) {
+        this.nameUrl = name;
     }
 
     public List<String> getTag() {
