@@ -25,25 +25,9 @@ public class kurochicontroller {
     @RequestMapping(path = "/addTag")
     public String tagopen(@ModelAttribute Account account, Model model) throws IOException {
         String tagerrorLog = "";
-        urlInfo.addTag("朝礼");
-        urlInfo.addTag("夕礼");
-        urlInfo.addTag("ギャザー");
-        // urlInfo.addTag(account.getPassward());
-
-        taglist.addTagNameList("朝礼");
-        taglist.addTagNameList("夕礼");
-        taglist.addTagNameList("ギャザー");
-
-        selectMap.put("1", "選択肢Aは、これですよ");
-        selectMap.put("2", "選択肢Ｂは、これですよ");
 
         model.addAttribute("tagdata", "");
         model.addAttribute("Account", account);
-        model.addAttribute("UrlInfomation", urlInfo);
-        model.addAttribute("TagList", taglist);
-        model.addAttribute("tagInput", taginput);
-
-        model.addAttribute("selectItems", selectMap);
         model.addAttribute("errorLog", tagerrorLog);
         return "kurochi/addTag";
     }
@@ -69,6 +53,9 @@ public class kurochicontroller {
                 case nulltag:
                     tagerrorLog = "同じタグがあります";
                     break;
+                case overtag:
+                    tagerrorLog = "10字以下のタグの名前を入力してください";
+                    break;
                 default:
                     tagerrorLog = "原因不明のエラーです";
                     break;
@@ -85,9 +72,7 @@ public class kurochicontroller {
         model.addAttribute("tagdata", "");
         model.addAttribute("Account", account);
         model.addAttribute("UrlInfomation", urlInfo);
-        model.addAttribute("TagList", taglist);
         model.addAttribute("tagInput", taginput);
-
         model.addAttribute("tagerrorLog", tagerrorLog);
 
         return "kurochi/addTag";
@@ -104,9 +89,6 @@ public class kurochicontroller {
         model.addAttribute("tagdata", "");
         model.addAttribute("Account", account);
         model.addAttribute("UrlInfomation", urlInfo);
-        model.addAttribute("tagInput", taginput);
-
-        model.addAttribute("TagList", taglist);
         model.addAttribute("selectItems", selecttagMap);
         return "kurochi/tagselect";
     }

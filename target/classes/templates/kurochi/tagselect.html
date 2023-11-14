@@ -16,10 +16,18 @@
           <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
         </select>
         <input type="submit" value="Submit" /></p>
+      </form>
         
         <div th:object="${Account}">
           <p class="msg" th:text="*{tagname}"></p>
         </div>
+
+        <form action="#" th:action="@{/DebugStart}" th:object="${Account}" method="post" name="memoPageForm">
+          <input type="hidden" th:field="*{name}" value="*{name}">
+          <input type="hidden" th:field="*{passward}" value="">
+          <input type="submit" value="戻る" />
+        </form>
+
     </body>
 </html>
         

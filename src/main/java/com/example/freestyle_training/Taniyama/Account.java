@@ -3,6 +3,8 @@ package com.example.freestyle_training.Taniyama;
 import java.util.List;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+
 import java.util.ArrayList;
 
 public class Account {
