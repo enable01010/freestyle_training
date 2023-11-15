@@ -29,6 +29,7 @@ public class UrlDelete {
         String readText = fileRead(file, strCount, getNameurl());
         try {
             FileWriter fW = new FileWriter(file);
+            // 新しいファイルで上書きする
             fW.write(readText);
             fW.close();
         } catch (IOException ex) {
@@ -52,9 +53,11 @@ public class UrlDelete {
             String textLine = null;
 
             while ((textLine = br.readLine()) != null) {
+                // 空白なら飛ばす
                 if (textLine.equals("")) {
                     continue;
                 }
+                // 消したいURLの名前と一致しなかったらfileReadに書き加える
                 if (!(str.equals(textLine.substring(1, strcount + 1)))) {
                     fileRead.append(textLine + "\r\n");
                 }
