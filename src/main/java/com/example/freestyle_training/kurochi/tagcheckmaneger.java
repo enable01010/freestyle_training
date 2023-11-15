@@ -34,15 +34,12 @@ public class tagcheckmaneger {
             return tagcheck.notag;
         }
 
-        if (!(account.getTagname().equals(""))) {
-            return tagcheck.success;
-        }
-
         for (i = 0; i < urlInfo.getTag().size(); i++) {
             if (account.getTagname().equals(urlInfo.getTag().get(i))) {
                 return tagcheck.nulltag;
             }
         }
+        
         return tagcheck.other;
     }
 

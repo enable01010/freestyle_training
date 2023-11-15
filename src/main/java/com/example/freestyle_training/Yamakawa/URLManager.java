@@ -125,6 +125,10 @@ public class URLManager {
                 br.close();
             }
 
+            if(account.getTagname().length() >= 11){
+                return tagcheck.overtag;
+            }
+
             // 比較
             boolean isSame = false;
             for (int i = 0; i < nowTagList.size(); i++) {

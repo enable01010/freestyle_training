@@ -32,6 +32,12 @@
           <p class="msg" th:text="*{tagname}"></p>
         </div>
 
+        <form action="#" th:action="@{/DebugStart}" th:object="${Account}" method="post" name="memoPageForm">
+          <input type="hidden" th:field="*{name}" value="*{name}">
+          <input type="hidden" th:field="*{passward}" value="">
+          <input type="submit" value="戻る" />
+        </form>
+
       </form>
     </body>
 </html>

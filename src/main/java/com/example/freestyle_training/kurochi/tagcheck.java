@@ -4,5 +4,7 @@ public enum tagcheck {
     success,
     notag,
     nulltag,
+    overtag,
+    overtaginput,
     other,
 }
