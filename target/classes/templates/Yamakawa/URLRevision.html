@@ -14,9 +14,9 @@
         <th:block th:each="i : ${#numbers.sequence(0,Account.getUrlList().size() - 1)}">
             <form action="#" th:action="@{/urlChange}" th:object="${Account}" method="post" name="urlChange">
                 <input type="hidden" name="i" th:value="${i}" />
-                <input type="hidden" name="NAME" th:value="${Account.getUrlList.get(i).name}" />
+                <input type="hidden" name="NAME" th:value="${Account.getUrlList.get(i).nameUrl}" />
                 <input type="hidden" name="URL" th:value="${Account.getUrlList.get(i).url}" />
-                <input type="submit" style="margin-right: 100px;"  th:value="${Account.getUrlList.get(i).name}">
+                <input type="submit" style="margin-right: 100px;"  th:value="${Account.getUrlList.get(i).nameUrl}">
                 <div th:text="${Account.getUrlList.get(i).url}"></div>
                 <br><br>
             </form>

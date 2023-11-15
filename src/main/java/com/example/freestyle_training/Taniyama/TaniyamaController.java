@@ -80,7 +80,7 @@ public class TaniyamaController {
 
         Account account = LoginManager.getInstance().ChengeJsonDataToAccount(accountData);
 
-        // データの保存
+        // データの保存f
         MemoManager.getInstance().memoSave(account);
     }
 
