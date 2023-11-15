@@ -89,7 +89,7 @@ public class TaniyamaController {
 
         memoSaveRequest(accountData, model);
         Account account = LoginManager.getInstance().ChengeJsonDataToAccount(accountData);
-        MemoManager.getInstance().memoAdd(account);
+        MemoManager.getInstance().memoAddToday(account);
         model.addAttribute("Account", account);
         return "Taniyama/MemoPage";
     }

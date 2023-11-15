@@ -28,7 +28,7 @@ public class MemoManager {
     public void memoOpen(Account account) {
 
         try {
-            File file = new File("src\\main\\db\\master\\memo");
+            File file = new File("src\\main\\db\\" + account.getName() + "\\memo");
             File[] fileArray = file.listFiles();
             for (int i = 0; i < fileArray.length; i++) {
                 String fileName = fileArray[i].getName();
@@ -72,7 +72,7 @@ public class MemoManager {
         }
     }
 
-    public void memoAdd(Account account) {
+    public void memoAddToday(Account account) {
         String basePass = "src\\main\\db\\" + account.getName() + "\\memo\\";
         GregorianCalendar gcalendar = new GregorianCalendar();
         String fileName = gcalendar.get(Calendar.YEAR) + "_" + (gcalendar.get(Calendar.MONTH) + 1) + "_"
