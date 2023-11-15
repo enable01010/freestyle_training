@@ -1,7 +1,7 @@
 package com.example.freestyle_training.haru;
 
 public class ErrorMessage {
-    String errorLog = "aaa";
+    String errorLog = "";
 
     public String getErrorLog() {
         return errorLog;
