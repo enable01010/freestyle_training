@@ -198,15 +198,20 @@ public class URLManager {
                     new InputStreamReader(new FileInputStream(file)));
             String data;
             StringBuilder fileContent = new StringBuilder();
-            int currentLine = 1;
+            int currentLine = 0;
             while ((data = bufferedReader.readLine()) != null) {
-                if (currentLine == (row * 2) + 1) {
-                    fileContent.append(name).append(System.lineSeparator());
-                    System.out.println(name);
-                } else if (currentLine == (row * 2) + 2) {
-                    fileContent.append(url).append(System.lineSeparator());
-                    System.out.println(url);
-                } else {
+
+                if(currentLine == row)
+                {
+                    String str = name+"_" + url + "_" ;
+                    String[] strarray = data.split("_");
+                    for(int i =2 ; i<strarray.length ; i++)
+                    {
+                        str+= strarray[i] + "_";
+                    }
+                    fileContent.append(str).append(System.lineSeparator());
+                }else 
+                {                    
                     fileContent.append(data).append(System.lineSeparator());
                 }
                 currentLine++;
@@ -215,8 +220,7 @@ public class URLManager {
             bufferedReader.close();
 
             BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream("C:\\freestyle_training\\src\\main\\db\\master\\url\\urlInfomation.txt"),
-                    "UTF-8"));
+                    new FileOutputStream("src\\main\\db\\" + account.getName() + "\\url\\urlInfomation.txt")));
             System.out.println(fileContent.toString());
             fileWriter.write(fileContent.toString());
             fileWriter.close();

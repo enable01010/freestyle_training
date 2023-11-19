@@ -32,12 +32,31 @@ public class YamakawaContloller {
         return "Yamakawa/URLRevision";
     }
 
-    @RequestMapping(path = "/urlPage")
-    public String urlSettingPageRequest(@ModelAttribute Account account, Model model, int i, String NAME, String URL)
+    @RequestMapping(path = "/urlChange")
+    public String urlSettingPageRequest(Model model, int i, String NAME, String URL,String AccountName,String AccountPassward)
             throws IOException {
 
+        System.out.println(i);
+                
+        model.addAttribute("AccountNAME", AccountName);
+        model.addAttribute("AccountPASSWARD", AccountPassward);
+        model.addAttribute("i", i);
+        model.addAttribute("URL", URL);
+        model.addAttribute("NAME", NAME);
+        model.addAttribute("errorMessage", "");
+        return "Yamakawa/URLChange";
+
+        
+    }
+
+    @RequestMapping(path = "/urlPage")
+    public String urlSettingChangeRequest(String AccountName, String AccountPassward, Model model, int i, String NAME, String URL)
+            throws IOException {
+
+
         if (NAME.length() == 0 || URL.length() == 0) {
-            model.addAttribute("Account", account);
+            model.addAttribute("AccountNAME", AccountName);
+            model.addAttribute("AccountPASSWARD", AccountPassward);
             model.addAttribute("i", i);
             model.addAttribute("URL", URL);
             model.addAttribute("NAME", NAME);
@@ -45,22 +64,14 @@ public class YamakawaContloller {
             return "Yamakawa/URLChange";
         }
 
+        Account account = new Account();
+
+        account.setName(AccountName);
+        account.setPassward(AccountPassward);
         URLManager.getInstance().urlSettingChange(account, NAME, URL, i);
         URLManager.getInstance().getUrlList(account);
         model.addAttribute("Account", account);
 
         return "Yamakawa/URLInfomation";
-    }
-
-    @RequestMapping(path = "/urlChange")
-    public String urlSettingChangeRequest(@ModelAttribute Account account, Model model, int i, String NAME, String URL)
-            throws IOException {
-        System.out.println(i);
-        model.addAttribute("Account", account);
-        model.addAttribute("i", i);
-        model.addAttribute("URL", URL);
-        model.addAttribute("NAME", NAME);
-        model.addAttribute("errorMessage", "");
-        return "Yamakawa/URLChange";
     }
 }

@@ -13,6 +13,8 @@
         <p>変更前----name : <span th:text="${NAME}" style="margin-right: 100px;"></span>URLPath : <span th:text="${URL}"></span></p>
         <input type="hidden" name="i" th:value="${i}" />
         <p>name:<input type="text" name="NAME" th:value="*{NAME}" /> URLPath<input type="text" name="URL" th:value="*{URL}"/></p>
+        <input type="hidden" name = "AccountName" th:value = "*{AccountNAME}"/>
+        <input type="hidden" name = "AccountPassward" th:value = "*{AccountPASSWARD}"/>
 
         <div th:text="${errorMessage}" style="color: darkred;"></div>
         <input type="submit" th:value="変更">
