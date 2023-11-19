@@ -22,7 +22,7 @@ public class UrlDelete {
     public void delete() {
 
         // Fileクラスをインスタンス化
-        File file = new File("src\\main\\db\\UrlData.txt");
+        File file = new File("src\\main\\db\\master\\url\\urlInfomation.txt");
 
         int strCount = getNameurl().length();
 
@@ -58,7 +58,7 @@ public class UrlDelete {
                     continue;
                 }
                 // 消したいURLの名前と一致しなかったらfileReadに書き加える
-                if (!(str.equals(textLine.substring(1, strcount + 1)))) {
+                if (!(str.equals(textLine.substring(0, strcount)))) {
                     fileRead.append(textLine + "\r\n");
                 }
             }
