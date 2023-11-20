@@ -12,14 +12,26 @@
         <!--ボタン処理 -->
         <div style="display: flex; justify-content: center;">
             <!-----------------------------タグ------------------------------------------->
-            <input type="button" onclick="location.href='http://localhost:8080/addTag'"
-                style="font-size: 24px; padding: 30px; margin: 10px;" value="タグ選択">
+            <form action="#" th:action="@{/tagRequest}" th:object="${Account}" method="post">
+                <input type="hidden" th:field="*{name}" value="*{name}">
+                <select id="singleSelect" name="*{tagname}" th:field = "*{tagname}"> 
+                  <option value="">---</option>
+                  <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
+                </select>
+                <input type="submit" value="タグ決定" style="font-size: 24px; padding: 30px; margin: 10px;" />
+              </form>
             <!----------------------------メモ------------------------------------------>
-            <input type="button" onclick="location.href='http://localhost:8080/MemoPage'"
-                style="font-size: 24px; padding: 30px; margin: 10px;" value="メモ">            
+            <form action="#" th:action="@{/memoPage}" th:object="${Account}" method="post" name="memoPageForm">
+                <input type="hidden" th:field="*{name}" value="*{name}">
+                <input type="hidden" th:field="*{passward}" value="*{passward}">
+                <input type="submit" value="メモ" style="font-size: 24px; padding: 30px; margin: 10px;" >
+            </form>          
             <!----------------------------URL追加-------------------------------------->
-            <input type="button" onclick="location.href='http://localhost:8080/addurl'"
-                style="font-size: 24px; padding: 30px; margin: 10px;" value="追加">            
+            <form action="#" th:action="@{/addurl}" th:object="${Account}" method="post" name="memoPageForm">
+                <input type="hidden" th:field="*{name}" value="*{name}">
+                <input type="hidden" th:field="*{passward}" value="*{passward}">
+                <input type="submit" style="font-size: 24px; padding: 30px; margin: 10px;" value="追加">
+            </form>           
             <!----------------------------変更、削除-------------------------------------->
             <form action="#" th:action="@{/urlRevision}" th:object="${Account}" method="post" name="urlRevision">
                 <input type="hidden" th:field="*{name}" value="*{name}">
@@ -27,13 +39,14 @@
                 <input type="submit" style="font-size: 24px; padding: 30px; margin: 10px;" value="変更・削除" />
             </form>
             <!-----------------------------ログアウト--------------------------------------->
-            <input type="button" style="font-size: 24px; padding: 30px; margin: 10px;" value="ログアウト">
+            <input type="button" onclick="location.href='http://localhost:8080/loginPage'"
+                style="font-size: 24px; padding: 30px; margin: 10px;" value="ログアウト">
 
 
         </div>
         <!--URL一覧処理 -->
         <div style="font-size: 30px; margin-top: 30px; border: 1px solid black; padding: 100px;text-align: left;">
-            <th:block th:each="i : ${#numbers.sequence(0,Account.getUrlList().size() - 1)}">
+            <th:block th:if="${Account.getUrlList().size() != 0}" th:each="i : ${#numbers.sequence(0,Account.getUrlList().size() - 1)}">
                 <span style="margin-right: 100px;" th:text="${Account.getUrlList.get(i).nameUrl}"></span>
                 <a th:href="${Account.getUrlList.get(i).url}" th:text="${Account.getUrlList.get(i).url}"></a>
                 <br><br>

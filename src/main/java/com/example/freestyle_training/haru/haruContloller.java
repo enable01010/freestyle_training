@@ -18,31 +18,35 @@ import org.springframework.ui.Model;
 @Controller
 public class haruContloller {
     @RequestMapping(path = "/addurl")
-    public String urlAddPageRequest(@ModelAttribute Account account, Model model) throws IOException {
+    public static String urlAddPageRequest(@ModelAttribute Account account, Model model, ErrorMessage errorLog,
+            String tagError)
+            throws IOException {
         UrlInfomation urlInfo = new UrlInfomation();
-        ErrorMessage errorLog = new ErrorMessage();
+        if (errorLog == null)
+            errorLog = new ErrorMessage();
+
+        if (tagError == null)
+            tagError = "";
 
         URLManager.getInstance().getTag(account);
+        urlInfo.setTag(account.getTagList());
 
         model.addAttribute("Account", account);
         model.addAttribute("UrlInfomation", urlInfo);
         model.addAttribute("ErrorMessage", errorLog);
+        model.addAttribute("tagdata", "");
+        model.addAttribute("errorLog", tagError);
         return "Hirata/addurl";
     }
 
     @RequestMapping(path = "/submit")
-    public String urlAddRequest(@ModelAttribute Account account, Model model, @ModelAttribute UrlInfomation urlInfo,
-            @ModelAttribute ErrorMessage errorLog)
+    public String urlAddRequest(@ModelAttribute Account account, Model model, @ModelAttribute UrlInfomation urlInfo)
             throws IOException {
 
         if (urlInfo.getNameUrl().equals("") || urlInfo.getUrl().equals("")) {
+            ErrorMessage errorLog = new ErrorMessage();
             errorLog.setErrorLog("名前またはURLの入力が不十分です");
-            urlInfo.setNameUrl(null);
-            urlInfo.setUrl(null);
-            model.addAttribute("Account", account);
-            model.addAttribute("UrlInfomation", urlInfo);
-            model.addAttribute("ErrorMessage", errorLog);
-            return "Hirata/addurl";
+            return urlAddPageRequest(account, model, errorLog, null);
         }
 
         URLManager.getInstance().addUrl(account, urlInfo);

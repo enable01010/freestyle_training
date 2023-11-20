@@ -60,6 +60,10 @@ public class UrlInfomation {
         tag = nametag;
     }
 
+    public void setTag(String add) {
+        tag.add(add);
+    }
+
     public void addTag(String add) {
         tag.add(add);
     }

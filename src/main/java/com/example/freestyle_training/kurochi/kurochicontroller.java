@@ -15,6 +15,8 @@ import com.example.freestyle_training.Yamakawa.URLManager;
 
 import org.springframework.ui.Model;
 
+import com.example.freestyle_training.haru.haruContloller;
+
 @Controller
 public class kurochicontroller {
     UrlInfomation urlInfo = new UrlInfomation();
@@ -33,7 +35,8 @@ public class kurochicontroller {
     }
 
     @RequestMapping(path = "/inputTag")
-    public String tagAddRequest(@ModelAttribute Account account, Model model, UrlInfomation urlInfo, tagInput taginput)
+    public static String tagAddRequest(@ModelAttribute Account account, Model model, UrlInfomation urlInfo,
+            tagInput taginput)
             throws IOException {
         String tagerrorLog = "";
 
@@ -44,7 +47,7 @@ public class kurochicontroller {
 
         // 結果を元に処理
         if (result == tagcheck.success) {
-            model.addAttribute("Account", account);
+
         } else {
             switch (result) {
                 case notag:
@@ -60,26 +63,14 @@ public class kurochicontroller {
                     tagerrorLog = "原因不明のエラーです";
                     break;
             }
-
-            model.addAttribute("Account", account);
-            model.addAttribute("errorLog", tagerrorLog);
         }
 
-        urlInfo.addTag("朝礼");
-        urlInfo.addTag("夕礼");
-        urlInfo.addTag("ギャザー");
-
-        model.addAttribute("tagdata", "");
-        model.addAttribute("Account", account);
-        model.addAttribute("UrlInfomation", urlInfo);
-        model.addAttribute("tagInput", taginput);
-        model.addAttribute("tagerrorLog", tagerrorLog);
-
-        return "kurochi/addTag";
+        return haruContloller.urlAddPageRequest(account, model, null, tagerrorLog);
     }
 
     @RequestMapping(path = "/tagselect")
-    public String tagRequest(@ModelAttribute Account account, Model model, UrlInfomation urlInfo) throws IOException {
+    public String tagRequestDemo(@ModelAttribute Account account, Model model, UrlInfomation urlInfo)
+            throws IOException {
         URLManager.getInstance().getTag(account);
         Map<String, String> selecttagMap = new LinkedHashMap<String, String>();
         for (int i = 0; i < account.getTagList().size(); i++) {
@@ -91,5 +82,25 @@ public class kurochicontroller {
         model.addAttribute("UrlInfomation", urlInfo);
         model.addAttribute("selectItems", selecttagMap);
         return "kurochi/tagselect";
+    }
+
+    @RequestMapping(path = "/tagRequest")
+    public String tagRequest(@ModelAttribute Account account, Model model) throws IOException {
+
+        // タグでソートされたUrlリストの読み込み
+        URLManager.getInstance().getUrlListSortTag(account);
+
+        // タグの読み込み
+        URLManager.getInstance().getTag(account);
+        Map<String, String> selecttagMap = new LinkedHashMap<String, String>();
+        for (int i = 0; i < account.getTagList().size(); i++) {
+            selecttagMap.put(Integer.valueOf(i).toString(), account.getTagList().get(i));
+        }
+
+        model.addAttribute("Account", account);
+        model.addAttribute("tagdata", "");
+        model.addAttribute("selectItems", selecttagMap);
+
+        return "Yamakawa/URLInfomation";
     }
 }

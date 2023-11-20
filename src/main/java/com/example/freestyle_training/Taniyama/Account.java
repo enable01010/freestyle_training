@@ -126,6 +126,9 @@ public class Account {
     }
 
     public List<UrlInfomation> getUrlList() {
+        if (urlList == null) {
+            urlList = new ArrayList<UrlInfomation>();
+        }
         return urlList;
     }
 

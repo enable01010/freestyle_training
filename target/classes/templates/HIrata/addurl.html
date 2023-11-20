@@ -16,11 +16,23 @@
         <p>name:<input type="text" th:field="${UrlInfomation.nameUrl}" /> URLPath<input type="text" th:field="${UrlInfomation.url}" /></p>
         <h2>タグの選択</h2>
         <p>
-            <th:block th:each="i : ${#numbers.sequence(0,Account.getTagList().size() - 1)}">
-                <input type="checkbox" th:value="${Account.getTagList().get(i)}"  th:field="${UrlInfomation.tag}" th:text="${Account.getTagList().get(i)}"/> 
+            <th:block th:if="${UrlInfomation.getTag().size() != 0}" th:each="i : ${#numbers.sequence(0,UrlInfomation.getTag().size() - 1)}">
+                <input type="checkbox" th:value="${UrlInfomation.getTag().get(i)}"  th:field="${UrlInfomation.tag}" th:text="${UrlInfomation.getTag().get(i)}"/>
+
             </th:block>
         </p>
         <p><input type="submit" value="決定"/> </p>
     </form>
+
+    <br>
+
+    <div style ="color:red" th:text="${errorLog}"></div>
+    <form action="#" th:action="@{/inputTag}" th:object="${Account}" method="post">
+    <p>タグの追加</p>
+    <input type="hidden" th:field="*{name}" value="*{name}">
+    <input type="hidden" th:field="*{passward}" value="*{passward}">
+    <p>タグ: <input type="text" th:field="*{tagname}" value =""/><input type="submit" value="Submit" /></p>
+    </form>
+
     </body>
 </html>
