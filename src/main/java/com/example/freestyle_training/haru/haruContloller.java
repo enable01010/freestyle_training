@@ -14,6 +14,7 @@ import com.example.freestyle_training.Taniyama.UrlInfomation;
 import com.example.freestyle_training.Yamakawa.URLManager;
 
 import org.springframework.ui.Model;
+import com.example.freestyle_training.Yamakawa.YamakawaContloller;
 
 @Controller
 public class haruContloller {
@@ -52,7 +53,7 @@ public class haruContloller {
         URLManager.getInstance().addUrl(account, urlInfo);
 
         model.addAttribute("Account", account);
-        return "Taniyama/DebugStart";
+        return YamakawaContloller.urlSummaryPageRequest(account, model);
     }
 
     @RequestMapping(path = "/deleteurl")

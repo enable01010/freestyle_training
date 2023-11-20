@@ -35,7 +35,7 @@ public class URLManager {
 
     public void getUrlList(Account account) {
         try {
-            File file = new File("src\\main\\db\\master\\url\\urlInfomation.txt");
+            File file = new File("src\\main\\db\\" + account.getName() + "\\url\\urlInfomation.txt");
 
             if (!file.exists()) {
                 System.out.print("ファイルが開けません");
@@ -125,7 +125,7 @@ public class URLManager {
                 br.close();
             }
 
-            if(account.getTagname().length() >= 11){
+            if (account.getTagname().length() >= 11) {
                 return tagcheck.overtag;
             }
 
@@ -184,7 +184,7 @@ public class URLManager {
         }
     }
 
-    public void urlSettingChange(Account account, String name, String url, int row) {
+    public void urlSettingChange(Account account, String name, String url, int row, List<String> tag) {
         try {
             File file = new File("src\\main\\db\\" + account.getName() + "\\url\\urlInfomation.txt");
 
@@ -201,17 +201,13 @@ public class URLManager {
             int currentLine = 0;
             while ((data = bufferedReader.readLine()) != null) {
 
-                if(currentLine == row)
-                {
-                    String str = name+"_" + url + "_" ;
-                    String[] strarray = data.split("_");
-                    for(int i =2 ; i<strarray.length ; i++)
-                    {
-                        str+= strarray[i] + "_";
+                if (currentLine == row) {
+                    String str = name + "_" + url + "_";
+                    for (int i = 0; i < tag.size(); i++) {
+                        str += tag.get(i) + "_";
                     }
                     fileContent.append(str).append(System.lineSeparator());
-                }else 
-                {                    
+                } else {
                     fileContent.append(data).append(System.lineSeparator());
                 }
                 currentLine++;
@@ -255,6 +251,39 @@ public class URLManager {
 
         }
 
+    }
+
+    public void getTagOnly(Account account, int row, List<String> tags) {
+        try {
+            File file = new File("src\\main\\db\\" + account.getName() + "\\url\\urlInfomation.txt");
+
+            if (!file.exists()) {
+                System.out.print("ファイルが開けません");
+                return;
+            }
+
+            // .txt読み込み
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(file)));
+            String data;
+            // １行ずつ読み込み
+            int i = 0;
+            while ((data = bufferedReader.readLine()) != null) {
+                if (i == row) {
+                    String[] urlDataSprits = data.split("_");
+                    for (int j = 2; j < urlDataSprits.length; j++) {
+                        tags.add(urlDataSprits[j]);
+                    }
+                }
+
+                i++;
+            }
+
+            bufferedReader.close();
+
+        } catch (IOException e) {
+
+        }
     }
 
 }

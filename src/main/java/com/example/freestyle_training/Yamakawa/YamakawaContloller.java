@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.freestyle_training.Taniyama.Account;
+import com.example.freestyle_training.Taniyama.UrlInfomation;
 
 import org.springframework.ui.Model;
+
+import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 public class YamakawaContloller {
     @RequestMapping(path = "/urlInfomation")
-    public String urlSummaryPageRequest(Account account, Model model) throws IOException {
+    public static String urlSummaryPageRequest(Account account, Model model) throws IOException {
 
         // Urlの取得
         URLManager.getInstance().getUrlList(account);
@@ -52,19 +56,35 @@ public class YamakawaContloller {
 
         System.out.println(i);
 
+        // タグ情報の取得
+        Account account = new Account();
+        account.setName(AccountName);
+        account.setPassward(AccountPassward);
+        URLManager.getInstance().getTag(account);
+
+        List<String> nowSelectedTag = new ArrayList<String>();
+        URLManager.getInstance().getTagOnly(account, i, nowSelectedTag);
+
+        UrlInfomation info = new UrlInfomation();
+        info.setTag(nowSelectedTag);
+
+        model.addAttribute("Account", account);
         model.addAttribute("AccountNAME", AccountName);
         model.addAttribute("AccountPASSWARD", AccountPassward);
         model.addAttribute("i", i);
         model.addAttribute("URL", URL);
         model.addAttribute("NAME", NAME);
         model.addAttribute("errorMessage", "");
+        model.addAttribute("UrlInfomation", info);
+        model.addAttribute("selectedTag", nowSelectedTag);
+
         return "Yamakawa/URLChange";
 
     }
 
     @RequestMapping(path = "/urlPage")
     public String urlSettingChangeRequest(String AccountName, String AccountPassward, Model model, int i, String NAME,
-            String URL)
+            String URL, @ModelAttribute UrlInfomation info)
             throws IOException {
 
         if (NAME.length() == 0 || URL.length() == 0) {
@@ -81,10 +101,8 @@ public class YamakawaContloller {
 
         account.setName(AccountName);
         account.setPassward(AccountPassward);
-        URLManager.getInstance().urlSettingChange(account, NAME, URL, i);
-        URLManager.getInstance().getUrlList(account);
-        model.addAttribute("Account", account);
+        URLManager.getInstance().urlSettingChange(account, NAME, URL, i, info.getTag());
 
-        return "Yamakawa/URLInfomation";
+        return urlSummaryPageRequest(account, model);
     }
 }

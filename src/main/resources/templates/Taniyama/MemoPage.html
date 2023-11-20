@@ -100,7 +100,16 @@
     </head>
 
     <body onload="startFunc();">
-        
+        <div style="display: flex; justify-content: center;">
+            <form action="#" th:action="@{/urlInfomation}" th:object="${Account}" method="post" name="urlInfomation">
+                <input type="hidden" th:field="*{name}" value="*{name}">
+                <input type="hidden" th:field="*{passward}" value="*{passward}">            
+                <input type="submit" value="URL一覧" />
+            </form>
+            <input type="button" onclick="location.href='http://localhost:8080/loginPage'" value="ログアウト">
+        </div>
+        <br>
+
         <div th:object="${Account}">
             <table border="1" align="left">
                 <tr>

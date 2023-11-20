@@ -8,6 +8,17 @@
     </head>
 
     <body>
+    <!-- ヘッダー -->
+    <div style="display: flex; ">
+        <form action="#" th:action="@{/urlInfomation}" th:object="${Account}" method="post" name="urlInfomation">
+            <input type="hidden" th:field="*{name}" value="*{name}">
+            <input type="hidden" th:field="*{passward}" value="*{passward}">            
+            <input type="submit" value="URL一覧" />
+        </form>
+        <input type="button" onclick="location.href='http://localhost:8080/loginPage'" value="ログアウト">
+    </div>
+    <br>
+    <!-- 中身　-->
     <h2>基本情報</h2>
     <form action="#" th:action="@{/submit}"  method="post">
         <input type="hidden" th:field="${Account.name}" value="${Account.name}">
