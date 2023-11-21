@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import com.example.freestyle_training.Yamakawa.URLManager;
+import com.example.freestyle_training.Yamakawa.YamakawaContloller;
 
 @Controller
 public class TaniyamaController {
@@ -38,9 +39,7 @@ public class TaniyamaController {
 
         // 結果を元に処理
         if (result == AccountCheckResult.success) {
-            URLManager.getInstance().getUrlList(account);
-            model.addAttribute("Account", account);
-            return "Yamakawa/URLInfomation";
+            return YamakawaContloller.urlSummaryPageRequest(account, model);
         } else {
 
             String errorLog = "";

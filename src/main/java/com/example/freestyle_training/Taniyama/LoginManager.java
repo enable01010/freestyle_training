@@ -24,6 +24,12 @@ public class LoginManager {
     // #endregion
 
     public AccountCheckResult accountCheck(Account account) {
+        if (account == null)
+            return AccountCheckResult.other;
+
+        if (account.getName() == null || account.getPassward() == null)
+            return AccountCheckResult.other;
+
         if (account.getName().equals("") || account.getPassward().equals(""))
             return AccountCheckResult.inputNon;
 
