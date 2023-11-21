@@ -87,12 +87,20 @@ public class YamakawaContloller {
             String URL, @ModelAttribute UrlInfomation info)
             throws IOException {
 
-        if (NAME.length() == 0 || URL.length() == 0) {
+        if (NAME.length() == 0 || URL.length() == 0) {        
+            
+            Account account = new Account();
+            account.setName(AccountName);
+            account.setPassward(AccountPassward);
+            URLManager.getInstance().getTag(account);
+            
+            model.addAttribute("Account", account);
             model.addAttribute("AccountNAME", AccountName);
             model.addAttribute("AccountPASSWARD", AccountPassward);
             model.addAttribute("i", i);
             model.addAttribute("URL", URL);
             model.addAttribute("NAME", NAME);
+            model.addAttribute("UrlInfomation", info);            
             model.addAttribute("errorMessage", "正しい入力がされていません");
             return "Yamakawa/URLChange";
         }

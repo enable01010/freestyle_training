@@ -15,8 +15,7 @@
         <input type="hidden" name="i" th:value="${i}" />
         <p>name:<input type="text" name="NAME" th:value="*{NAME}" /> URLPath<input type="text" name="URL" th:value="*{URL}"/></p>
         <input type="hidden" name = "AccountName" th:value = "*{AccountNAME}"/>
-        <input type="hidden" name = "AccountPassward" th:value = "*{AccountPASSWARD}"/>
-
+        <input type="hidden" name = "AccountPassward" th:value = "*{AccountPASSWARD}"/>        
         <h2>タグの選択</h2>
         <p>
             <th:block th:if="${Account.getTagList().size() != 0}" th:each="i : ${#numbers.sequence(0,Account.getTagList().size() - 1)}">
