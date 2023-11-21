@@ -14,6 +14,7 @@
             <!-----------------------------タグ------------------------------------------->
             <form action="#" th:action="@{/tagRequest}" th:object="${Account}" method="post">
                 <input type="hidden" th:field="*{name}" value="*{name}">
+                <input type="hidden" th:field="*{passward}" value="*{passward}">
                 <select id="singleSelect" name="*{tagname}" th:field = "*{tagname}"> 
                   <option value="">---</option>
                   <option th:each="item : ${selectItems}" th:value="${item.value}" th:text="${item.value}" ></option>>singleSelect</option>
