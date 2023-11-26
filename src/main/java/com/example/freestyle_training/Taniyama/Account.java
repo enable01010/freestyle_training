@@ -136,6 +136,13 @@ public class Account {
         this.urlList = urlList;
     }
 
+    public void deleteUrlList() {
+        if (urlList == null)
+            return;
+
+        urlList.clear();
+    }
+
     public void addUrlList(UrlInfomation add) {
         urlList.add(add);
     }

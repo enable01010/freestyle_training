@@ -28,6 +28,13 @@
         <div th:text="${errorMessage}" style="color: darkred;"></div>
         <input type="submit" th:value="変更">
     </form>
+
+    <form action="#" th:action="@{/delete}"  method="post">
+        <input type="hidden" th:field="${Account.name}" value="${Account.name}">
+        <input type="hidden" th:field="${Account.passward}" th:value = "${Account.passward}"/>  
+        <input type="hidden" name="i" th:value="${i}" />
+        <p><input type="submit" value="削除"/></p>
+    </form>
 </body>
 
 </html>
