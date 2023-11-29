@@ -1,6 +1,8 @@
 package com.example.freestyle_training.haru;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,11 +46,14 @@ public class haruContloller {
     public String urlAddRequest(@ModelAttribute Account account, Model model, @ModelAttribute UrlInfomation urlInfo)
             throws IOException {
 
-        int urlLength = account.getUrlList().size();
-        for (int i = 0; i < urlLength; i++) {
-            if (account.getUrlList().get(i).getNameUrl().equals(urlInfo.getNameUrl())) {
+        String basePass = "src\\main\\db\\" + account.getName() + "\\url\\urlInfomation.txt";
+        FileReader fr = new FileReader(basePass);
+        BufferedReader br = new BufferedReader(fr);
+        String textLine = null;
+        while ((textLine = br.readLine()) != null) {
+            if (urlInfo.getNameUrl().equals(textLine.substring(0, textLine.indexOf("_")))) {
                 ErrorMessage errorLog = new ErrorMessage();
-                errorLog.setErrorLog("すでに使われている名前です");
+                errorLog.setErrorLog("すでにその名前は使われています");
                 return urlAddPageRequest(account, model, errorLog, null);
             }
         }
