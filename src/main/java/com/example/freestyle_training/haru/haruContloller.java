@@ -77,12 +77,23 @@ public class haruContloller {
     }
 
     @RequestMapping(path = "/delete")
-    public String urlSettingDeleteRequest(@ModelAttribute Account account, Model model,
-            @ModelAttribute UrlDelete urlDelete)
+    public String urlSettingDeleteRequest(@ModelAttribute Account account, Model model, int i)
             throws IOException {
-        urlDelete.delete();
 
-        model.addAttribute("Account", account);
-        return "Taniyama/DebugStart";
+        URLManager.getInstance().urlDelete(account, i);
+        account.deleteUrlList();
+
+        return YamakawaContloller.urlSummaryPageRequest(account, model);
     }
+
+    // @RequestMapping(path = "/delete")
+    // public String urlSettingDeleteRequest(@ModelAttribute Account account, Model
+    // model,
+    // @ModelAttribute UrlDelete urlDelete)
+    // throws IOException {
+    // urlDelete.delete();
+
+    // model.addAttribute("Account", account);
+    // return "Taniyama/DebugStart";
+    // }
 }

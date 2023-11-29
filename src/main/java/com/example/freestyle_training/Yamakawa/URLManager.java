@@ -225,23 +225,22 @@ public class URLManager {
         }
     }
 
-    public void urlDelete(Account account, String deleteName) {
-        int urlLength = account.getUrlList().size();
-        for (int i = 0; i < urlLength; i++) {
-            if (account.getUrlList().get(i).getNameUrl().equals(deleteName)) {
-                account.getUrlList().remove(i);
-                break;
-            }
-        }
+    public void urlDelete(Account account, int row) {
+        getUrlList(account);
+
+        account.getUrlList().remove(row);
 
         String basePass = "src\\main\\db\\" + account.getName() + "\\url\\urlInfomation.txt";
         try {
             File file = new File(basePass);
             FileWriter fw = new FileWriter(file);
-            urlLength = account.getUrlList().size();
+            int urlLength = account.getUrlList().size();
             for (int i = 0; i < urlLength; i++) {
-                UrlInfomation urlInfo = account.getUrlList().get(i);
-                String line = urlInfo.getNameUrl() + "_" + urlInfo.getUrl() + urlInfo.getTagName();
+                UrlInfomation accountUrlInfo = account.getUrlList().get(i);
+                String line = accountUrlInfo.getNameUrl() + "_"
+                        + accountUrlInfo.getUrl() + "_"
+                        + accountUrlInfo.getTagName()
+                        + "\n";
                 fw.write(line);
             }
 
