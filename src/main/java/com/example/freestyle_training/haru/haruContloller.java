@@ -44,6 +44,15 @@ public class haruContloller {
     public String urlAddRequest(@ModelAttribute Account account, Model model, @ModelAttribute UrlInfomation urlInfo)
             throws IOException {
 
+        int urlLength = account.getUrlList().size();
+        for (int i = 0; i < urlLength; i++) {
+            if (account.getUrlList().get(i).getNameUrl().equals(urlInfo.getNameUrl())) {
+                ErrorMessage errorLog = new ErrorMessage();
+                errorLog.setErrorLog("すでに使われている名前です");
+                return urlAddPageRequest(account, model, errorLog, null);
+            }
+        }
+
         if (urlInfo.getNameUrl().equals("") || urlInfo.getUrl().equals("")) {
             ErrorMessage errorLog = new ErrorMessage();
             errorLog.setErrorLog("名前またはURLの入力が不十分です");
